@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!--
+	24 News by FreeHTML5.co
+	Twitter: https://twitter.com/fh5co
+	Facebook: https://fb.com/fh5co
+	URL: https://freehtml5.co
+-->
+<html lang="en" class="no-js">
+<head>
+{% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Politics - 24 News</title>
+    <link href="{% static 'css/media_query.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/owl.theme.default.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/style_1.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- Modernizr JS -->
+    <script src="{% static 'js/modernizr-3.5.0.min.js' %}"></script>
+</head>
+<body>
+<div class="container-fluid fh5co_header_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 fh5co_mediya_center"><a href="#" class="color_fff fh5co_mediya_setting"><i
+                    class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;Friday, 5 January 2018</a>
+                <div class="d-inline-block fh5co_trading_posotion_relative"><a href="#" class="treding_btn">Breaking</a>
+                    <div class="fh5co_treding_position_absolute"></div>
+                </div>
+                <a href="#" class="color_fff fh5co_mediya_setting">Historic peace agreement signed between neighboring nations</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3 fh5co_padding_menu">
+                <img src="{% static 'images/logo.png' %}" alt="img" class="fh5co_logo_width"/>
+            </div>
+            <div class="col-12 col-md-9 align-self-center fh5co_mediya_right">
+                <div class="text-center d-inline-block">
+                    <a class="fh5co_display_table"><div class="fh5co_verticle_middle"><i class="fa fa-search"></i></div></a>
+                </div>
+                <div class="text-center d-inline-block">
+                    <a class="fh5co_display_table"><div class="fh5co_verticle_middle"><i class="fa fa-linkedin"></i></div></a>
+                </div>
+                <div class="text-center d-inline-block">
+                    <a class="fh5co_display_table"><div class="fh5co_verticle_middle"><i class="fa fa-google-plus"></i></div></a>
+                </div>
+                <div class="text-center d-inline-block">
+                    <a href="https://twitter.com/fh5co" target="_blank" class="fh5co_display_table"><div class="fh5co_verticle_middle"><i class="fa fa-twitter"></i></div></a>
+                </div>
+                <div class="text-center d-inline-block">
+                    <a href="https://fb.com/fh5co" target="_blank" class="fh5co_display_table"><div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div></a>
+                </div>
+                <div class="d-inline-block text-center dd_position_relative ">
+                    <select class="form-control fh5co_text_select_option">
+                        <option>English </option>
+                        <option>French </option>
+                        <option>German </option>
+                        <option>Spanish </option>
+                    </select>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-faded fh5co_padd_mediya padding_786">
+    <div class="container padding_786">
+        <nav class="navbar navbar-toggleable-md navbar-light ">
+            <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+            <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt="img" class="mobile_logo_width"/></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog' %}">Blog <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'single' %}">Single <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="worldDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">World</a>
+                        <div class="dropdown-menu" aria-labelledby="worldDropdown">
+                            <a class="dropdown-item" href="{% url 'politics' %}">Politics</a>
+                            <a class="dropdown-item" href="{% url 'business' %}">Business</a>
+                            <a class="dropdown-item" href="{% url 'technology' %}">Technology</a>
+                            <a class="dropdown-item" href="{% url 'science' %}">Science</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Community</a>
+                        <div class="dropdown-menu" aria-labelledby="communityDropdown">
+                            <a class="dropdown-item" href="{% url 'forums' %}">Forums</a>
+                            <a class="dropdown-item" href="{% url 'events' %}">Events</a>
+                            <a class="dropdown-item" href="{% url 'members' %}">Members</a>
+                            <a class="dropdown-item" href="{% url 'groups' %}">Groups</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container-fluid paddding mb-5">
+    <div class="row mx-0">
+        <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
+            <div class="fh5co_suceefh5co_height"><img src="{% static 'images/allef-vinicius-108153.jpg' %}" alt="Peace Summit"/>
+                <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                <div class="fh5co_suceefh5co_height_position_absolute_font">
+                    <div class=""><a href="#" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Jan 5, 2018
+                    </a></div>
+                    <div class=""><a href="{% url 'single' %}" class="fh5co_good_font"> Historic Peace Summit Ends Decade-Long Border Dispute </a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                    <div class="fh5co_suceefh5co_height_2"><img src="{% static 'images/ryan-moreno-98837.jpg' %}" alt="Election"/>
+                        <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                        <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                            <div class=""><a href="#" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Jan 4, 2018 </a></div>
+                            <div class=""><a href="{% url 'single' %}" class="fh5co_good_font_2"> Presidential Election <br>Campaign Kicks Off </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                    <div class="fh5co_suceefh5co_height_2"><img src="{% static 'images/seth-doyle-133175.jpg' %}" alt="Congress"/>
+                        <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                        <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                            <div class=""><a href="#" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Jan 3, 2018 </a></div>
+                            <div class=""><a href="{% url 'single' %}" class="fh5co_good_font_2"> Landmark Healthcare Bill <br>Passes Congress </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                    <div class="fh5co_suceefh5co_height_2"><img src="{% static 'images/joe-gardner-75333.jpg' %}" alt="UN Meeting"/>
+                        <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                        <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                            <div class=""><a href="#" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Jan 2, 2018 </a></div>
+                            <div class=""><a href="{% url 'single' %}" class="fh5co_good_font_2"> UN Security Council <br>Approves Climate Resolution </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                    <div class="fh5co_suceefh5co_height_2"><img src="{% static 'images/vil-son-35490.jpg' %}" alt="Local Government"/>
+                        <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                        <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                            <div class=""><a href="#" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Jan 1, 2018 </a></div>
+                            <div class=""><a href="{% url 'single' %}" class="fh5co_good_font_2"> Mayoral Elections <br>Set for Spring </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pb-4 pt-4 paddding">
+    <div class="container paddding">
+        <div class="row mx-0">
+            <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                <div>
+                    <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Political Analysis</div>
+                </div>
+                <div class="row pb-4">
+                    <div class="col-md-5">
+                        <div class="fh5co_hover_news_img">
+                            <div class="fh5co_news_img"><img src="{% static 'images/policy-debate.jpg' %}" alt=""/></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 animate-box">
+                        <a href="{% url 'single' %}" class="fh5co_magna py-2"> Major Tax Reform Package Announced by Administration </a> <a href="{% url 'single' %}" class="fh5co_mini_time py-3"> Political Correspondent - January 5, 2018 </a>
+                        <div class="fh5co_consectetur"> The administration unveiled a comprehensive tax reform proposal that promises to simplify the tax code while providing relief to middle-class families and small businesses. Experts predict significant economic impact if passed.
+                        </div>
+                    </div>
+                </div>
+                <div class="row pb-4">
+                    <div class="col-md-5">
+                        <div class="fh5co_hover_news_img">
+                            <div class="fh5co_news_img"><img src="{% static 'images/diplomacy.jpg' %}" alt=""/></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <a href="{% url 'single' %}" class="fh5co_magna py-2"> Trade Agreement Opens New Markets for Local Industries </a> <a href="#" class="fh5co_mini_time py-3"> International Affairs - January 4, 2018 </a>
+                        <div class="fh5co_consectetur"> A landmark trade agreement between major economic blocs promises to create thousands of jobs and boost economic growth, while addressing environmental and labor concerns through innovative policy frameworks.
+                        </div>
+                    </div>
+                </div>
+                <div class="row pb-4">
+                    <div class="col-md-5">
+                        <div class="fh5co_hover_news_img">
+                            <div class="fh5co_news_img"><img src="{% static 'images/campaign-rally.jpg' %}" alt=""/></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <a href="{% url 'single' %}" class="fh5co_magna py-2"> Presidential Candidates Face Off in First Primary Debate </a> <a href="#" class="fh5co_mini_time py-3"> Election Coverage - January 3, 2018 </a>
+                        <div class="fh5co_consectetur"> The first presidential primary debate of the season showcased sharp divisions on key policy issues, with candidates presenting competing visions for the nation's future on healthcare, economy, and foreign policy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+                <div>
+                    <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Political Topics</div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="fh5co_tags_all">
+                    <a href="#" class="fh5co_tagg">Elections</a>
+                    <a href="#" class="fh5co_tagg">Congress</a>
+                    <a href="#" class="fh5co_tagg">White House</a>
+                    <a href="#" class="fh5co_tagg">Foreign Policy</a>
+                    <a href="#" class="fh5co_tagg">Economy</a>
+                    <a href="#" class="fh5co_tagg">Healthcare</a>
+                    <a href="#" class="fh5co_tagg">Immigration</a>
+                    <a href="#" class="fh5co_tagg">Climate Policy</a>
+                    <a href="#" class="fh5co_tagg">Defense</a>
+                    <a href="#" class="fh5co_tagg">Education</a>
+                    <a href="#" class="fh5co_tagg">Infrastructure</a>
+                    <a href="#" class="fh5co_tagg">Justice</a>
+                </div>
+                <div>
+                    <div class="fh5co_heading fh5co_heading_border_bottom pt-3 py-2 mb-4">Trending Politics</div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-5 align-self-center">
+                        <img src="{% static 'images/president-speech.jpg' %}" alt="img" class="fh5co_most_trading"/>
+                    </div>
+                    <div class="col-7 paddding">
+                        <div class="most_fh5co_treding_font"> President Addresses Nation on Economic Recovery</div>
+                        <div class="most_fh5co_treding_font_123"> 1 hour ago</div>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-5 align-self-center">
+                        <img src="{% static 'images/senate-hearing.jpg' %}" alt="img" class="fh5co_most_trading"/>
+                    </div>
+                    <div class="col-7 paddding">
+                        <div class="most_fh5co_treding_font"> Senate Hearing on Tech Regulation Begins</div>
+                        <div class="most_fh5co_treding_font_123"> 3 hours ago</div>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-5 align-self-center">
+                        <img src="{% static 'images/governor-meeting.jpg' %}" alt="img" class="fh5co_most_trading"/>
+                    </div>
+                    <div class="col-7 paddding">
+                        <div class="most_fh5co_treding_font"> Governors Meet to Discuss Regional Cooperation</div>
+                        <div class="most_fh5co_treding_font_123"> 6 hours ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid fh5co_footer_bg pb-3">
+    <div class="container animate-box">
+        <div class="row">
+            <div class="col-12 spdp_right py-5"><img src="{% static 'images/white_logo.png' %}" alt="img" class="footer_logo"/></div>
+            <div class="clearfix"></div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="footer_main_title py-3"> About</div>
+                <div class="footer_sub_about pb-3"> Lorem Ipsum is simply dummy text of the printing and typesetting
+                    industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                    unknown printer took a galley of type and scrambled it to make a type specimen book.
+                </div>
+                <div class="footer_mediya_icon">
+                    <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+                        <div class="fh5co_verticle_middle"><i class="fa fa-linkedin"></i></div>
+                    </a></div>
+                    <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+                        <div class="fh5co_verticle_middle"><i class="fa fa-google-plus"></i></div>
+                    </a></div>
+                    <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+                        <div class="fh5co_verticle_middle"><i class="fa fa-twitter"></i></div>
+                    </a></div>
+                    <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+                        <div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div>
+                    </a></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="footer_main_title py-3"> Quick Links</div>
+                <ul class="footer_menu">
+                    <li><a href="#" class="footer_menu_item"><i class="fa fa-angle-right"></i> Home</a></li>
+                    <li><a href="#" class="footer_menu_item"><i class="fa fa-angle-right"></i> About</a></li>
+                    <li><a href="#" class="footer_menu_item"><i class="fa fa-angle-right"></i> Contact</a></li>
+                    <li><a href="#" class="footer_menu_item"><i class="fa fa-angle-right"></i> Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d972ee7f-e0a7-4c07-8c26-c5f7727979c7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Opera Browser.lnk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../clash of clans parsing" beforeDir="false" afterPath="$PROJECT_DIR$/../clash of clans parsing" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/Dockerfile.frontend" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/app/api/chat/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/app/globals.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/app/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/app/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/backend/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/backend/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/backend/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/about-section.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/certifications-section.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/contact-section.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/exobot.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/footer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/hero-section.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/navbar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/projects-section.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/skills-section.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/theme-provider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/accordion.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/alert-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/alert.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/aspect-ratio.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/avatar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/badge.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/breadcrumb.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/button-group.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/button.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/calendar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/card.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/carousel.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/chart.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/checkbox.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/collapsible.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/command.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/context-menu.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/drawer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/dropdown-menu.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/empty.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/field.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/form.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/hover-card.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/input-group.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/input-otp.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/input.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/item.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/kbd.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/label.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/menubar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/navigation-menu.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/pagination.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/popover.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/progress.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/radio-group.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/resizable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/scroll-area.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/select.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/separator.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/sheet.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/sidebar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/skeleton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/slider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/sonner.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/spinner.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/switch.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/table.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/tabs.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/textarea.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/toast.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/toaster.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/toggle-group.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/toggle.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/tooltip.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/use-mobile.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/components/ui/use-toast.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/hooks/use-mobile.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/hooks/use-toast.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/lib/utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/next.config.mjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/pnpm-lock.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/postcss.config.mjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/public/apple-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/public/icon-dark-32x32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/public/icon-light-32x32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/public/icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/public/placeholder-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/public/placeholder-logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/public/placeholder-user.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/public/placeholder.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/public/placeholder.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/styles/globals.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cybersecurity-portfolio-website/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../face ai recreatioin/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../face ai recreatioin/.idea/face ai recreatioin.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../face ai recreatioin/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../face ai recreatioin/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../face ai recreatioin/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../face ai recreatioin/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../face ai recreatioin/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../portfolio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../telegram bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../telegram bot/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/core" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="3BYraflF4sZ1vzMGxNIFOr3NjNi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\news\core\static" />
+      <recent name="C:\Users\User\Desktop\news\core\templates" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-ca5e2b39c7df-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.308" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d972ee7f-e0a7-4c07-8c26-c5f7727979c7" name="Changes" comment="" />
+      <created>1774676911595</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774676911595</updated>
+    </task>
+    <servers />
+  </component>
+</project>

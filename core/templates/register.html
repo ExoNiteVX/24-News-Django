@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Register - 24 News</title>
+    <link href="{% static 'css/media_query.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/owl.theme.default.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/style_1.css' %}" rel="stylesheet" type="text/css"/>
+    <script src="{% static 'js/modernizr-3.5.0.min.js' %}"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .register-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .register-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .register-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .register-header h2 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .register-header p {
+            color: white;
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .register-body {
+            padding: 40px 30px;
+            background: white;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+            color: #333;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            background: white;
+            color: #333;
+            outline: none;
+        }
+        
+        .form-control::placeholder {
+            color: #999;
+            opacity: 1;
+        }
+        
+        .btn-register {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .register-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .register-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .register-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+        
+        .form-row .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .custom-control-label {
+            color: #333;
+            font-weight: normal;
+        }
+        
+        .small {
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="register-container">
+    <div class="register-card">
+        <div class="register-header">
+            <h2>Create Account</h2>
+            <p>Join 24 News today</p>
+        </div>
+        <div class="register-body">
+            <div id="alert-container"></div>
+            <form id="registerForm">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                    <small class="form-text text-muted">Minimum 6 characters</small>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="agreeTerms" required>
+                        <label class="custom-control-label" for="agreeTerms">I agree to the <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a></label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-register">Create Account</button>
+                <div class="register-links">
+                    <a href="{% url 'login' %}">Already have an account? Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Terms Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>1. Acceptance of Terms</h6>
+                <p>By accessing and using 24 News, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                
+                <h6>2. Use License</h6>
+                <p>You may not use our service for any illegal or unauthorized purpose.</p>
+                
+                <h6>3. Account Security</h6>
+                <p>You are responsible for maintaining the confidentiality of your account credentials.</p>
+                
+                <h6>4. Privacy Policy</h6>
+                <p>Your privacy is important to us. We will not share your information without your consent.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script>
+console.log('Register page loaded');
+
+// Wait for DOM to be ready
+$(document).ready(function() {
+    console.log('Document ready');
+    
+    $('#registerForm').on('submit', function(e) {
+        console.log('Form submitted');
+        e.preventDefault();
+        
+        const firstName = $('#firstName').val();
+        const lastName = $('#lastName').val();
+        const email = $('#email').val();
+        const password = $('#password').val();
+        const confirmPassword = $('#confirmPassword').val();
+        const agreeTerms = $('#agreeTerms').is(':checked');
+        
+        console.log('Form data:', {firstName, lastName, email, agreeTerms});
+        
+        // Basic validation
+        if (!firstName || !lastName || !email || !password || !confirmPassword) {
+            showAlert('Please fill in all fields', 'danger');
+            return;
+        }
+        
+        if (!validateEmail(email)) {
+            showAlert('Please enter a valid email address', 'danger');
+            return;
+        }
+        
+        if (password.length < 6) {
+            showAlert('Password must be at least 6 characters long', 'danger');
+            return;
+        }
+        
+        if (password !== confirmPassword) {
+            showAlert('Passwords do not match', 'danger');
+            return;
+        }
+        
+        if (!agreeTerms) {
+            showAlert('You must agree to the terms and conditions', 'danger');
+            return;
+        }
+        
+        // Simple mock registration (replace with your backend)
+        const user = {
+            name: `${firstName} ${lastName}`,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            id: Date.now()
+        };
+        
+        console.log('Creating user:', user);
+        
+        // Store user session
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        console.log('User stored in localStorage');
+        
+        showAlert('Registration successful! Redirecting...', 'success');
+        
+        // Redirect to home page after successful registration
+        setTimeout(() => {
+            console.log('Redirecting to home page');
+            window.location.href = "{% url 'home' %}";
+        }, 1500);
+    });
+});
+
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function showAlert(message, type) {
+    console.log('Showing alert:', message, type);
+    const alertHtml = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    `;
+    $('#alert-container').html(alertHtml);
+}
+</script>
+</body>
+</html>
