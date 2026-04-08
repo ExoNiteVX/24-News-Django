@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - 24 News</title>
+    <meta name="description" content="Learn more about 24 News - your trusted source for breaking news, trending stories, and in-depth coverage.">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .about-hero {
+            background: linear-gradient(135deg, #f5bc04 0%, #e5ac00 100%);
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+        }
+        .about-hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .about-section {
+            padding: 60px 0;
+        }
+        .mission-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #f5bc04;
+        }
+    </style>
+</head>
+<body>
+    {% include 'includes/header.html' %}
+    
+    <!-- Hero Section -->
+    <div class="about-hero">
+        <div class="container">
+            <h1>About 24 News</h1>
+            <p class="lead">Your Trusted Source for Breaking News and In-Depth Coverage</p>
+        </div>
+    </div>
+    
+    <!-- About Content -->
+    <div class="about-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h2 class="text-center mb-4">Who We Are</h2>
+                    <p class="lead text-center">
+                        24 News is a leading digital news platform dedicated to delivering accurate, timely, and comprehensive news coverage from around the world.
+                    </p>
+                    <p>
+                        Founded with a mission to keep our readers informed, we cover everything from breaking news and politics to technology, science, and entertainment. Our team of experienced journalists and editors work around the clock to bring you the stories that matter.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mission & Vision -->
+    <div class="about-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mission-card">
+                        <h3><i class="fa fa-bullseye text-warning"></i> Our Mission</h3>
+                        <p>To provide accurate, unbiased, and timely news coverage that empowers our readers to make informed decisions and stay connected with the world around them.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mission-card">
+                        <h3><i class="fa fa-eye text-warning"></i> Our Vision</h3>
+                        <p>To become the most trusted and comprehensive news platform, known for our commitment to journalistic integrity and innovative storytelling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Stats -->
+    <div class="about-section">
+        <div class="container">
+            <h2 class="text-center mb-5">By The Numbers</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="stat-box">
+                        <div class="stat-number">10M+</div>
+                        <p>Monthly Readers</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stat-box">
+                        <div class="stat-number">50+</div>
+                        <p>Expert Journalists</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stat-box">
+                        <div class="stat-number">24/7</div>
+                        <p>News Coverage</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stat-box">
+                        <div class="stat-number">100K+</div>
+                        <p>Articles Published</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Team Section -->
+    <div class="about-section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Editorial Team</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img src="{% static 'images/allef-vinicius-108153.jpg' %}" alt="Editor in Chief">
+                        <h4>John Smith</h4>
+                        <p class="text-muted">Editor in Chief</p>
+                        <p>15+ years of journalism experience covering major global events.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img src="{% static 'images/vil-son-35490.jpg' %}" alt="Managing Editor">
+                        <h4>Sarah Johnson</h4>
+                        <p class="text-muted">Managing Editor</p>
+                        <p>Expert in digital media and content strategy.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img src="{% static 'images/zack-minor-15104.jpg' %}" alt="Senior Reporter">
+                        <h4>Michael Brown</h4>
+                        <p class="text-muted">Senior Reporter</p>
+                        <p>Award-winning investigative journalist.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contact CTA -->
+    <div class="about-section">
+        <div class="container text-center">
+            <h2 class="mb-4">Get In Touch</h2>
+            <p class="lead mb-4">Have a story tip or want to collaborate? We'd love to hear from you.</p>
+            <a href="{% url 'contact' %}" class="btn btn-warning btn-lg mr-3">Contact Us</a>
+            <a href="{% url 'home' %}" class="btn btn-outline-dark btn-lg">Browse News</a>
+        </div>
+    </div>
+    
+    {% include 'includes/footer.html' %}
+</body>
+</html>

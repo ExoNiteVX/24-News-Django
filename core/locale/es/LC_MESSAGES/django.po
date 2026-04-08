@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-31 15:12+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+
+#: .\templates\blog.html:82 .\templates\index.html:91
+msgid "Visit Profile"
+msgstr "Ver perfil"
+
+#: .\templates\blog.html:87 .\templates\index.html:96
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: .\templates\blog.html:96 .\templates\index.html:105
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: .\templates\blog.html:101 .\templates\index.html:110
+msgid "Register"
+msgstr "Registrarse"
+
+#: .\templates\index.html:36 .\templates\index.html:206
+msgid "Trending"
+msgstr "Tendencias"
+
+#: .\templates\index.html:130
+msgid "Home"
+msgstr "Inicio"
+
+#: .\templates\index.html:133
+msgid "Blog"
+msgstr "Blog"
+
+#: .\templates\index.html:137 .\templates\index.html:139
+msgid "Single"
+msgstr "Individual"
+
+#: .\templates\index.html:143
+msgid "World"
+msgstr "Mundo"
+
+#: .\templates\index.html:145
+msgid "Politics"
+msgstr "Política"
+
+#: .\templates\index.html:146
+msgid "Business"
+msgstr "Negocios"
+
+#: .\templates\index.html:147
+msgid "Technology"
+msgstr "Tecnología"
+
+#: .\templates\index.html:148
+msgid "Science"
+msgstr "Ciencia"
+
+#: .\templates\index.html:152
+msgid "Community"
+msgstr "Comunidad"
+
+#: .\templates\index.html:154
+msgid "Forums"
+msgstr "Foros"
+
+#: .\templates\index.html:155
+msgid "Events"
+msgstr "Eventos"
+
+#: .\templates\index.html:156
+msgid "Members"
+msgstr "Miembros"
+
+#: .\templates\index.html:157
+msgid "Groups"
+msgstr "Grupos"
+
+#: .\templates\index.html:161
+msgid "Contact"
+msgstr "Contacto"
+
+#: .\templates\index.html:316
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: .\templates\index.html:323
+msgid "Most Popular"
+msgstr "Más Popular"
+
+#: .\templates\profile.html:184
+msgid "Profile Photo"
+msgstr "Foto de perfil"
+
+#: .\templates\profile.html:189
+msgid "Upload a new profile photo"
+msgstr "Subir nueva foto de perfil"
+
+#: .\templates\profile.html:193
+msgid "Bio"
+msgstr "Biografía"
+
+#: .\templates\profile.html:194
+msgid "Tell us about yourself"
+msgstr "Cuéntanos sobre ti"
+
+#: .\templates\profile.html:198
+msgid "Phone Number"
+msgstr "Número de teléfono"
+
+#: .\templates\profile.html:199
+msgid "Enter your phone number"
+msgstr "Ingresa tu número de teléfono"

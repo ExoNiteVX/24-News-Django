@@ -7,7 +7,11 @@
 -->
 <html lang="en" class="no-js">
 <head>
-{% load static %}
+    {% load static %}
+    {% include 'includes/breaking_news.html' %}
+    {% include 'includes/search_modal.html' %}
+    {% load socialaccount %}
+    {% load i18n %}
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,8 +34,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12 fh5co_mediya_center"><a href="#" class="color_fff fh5co_mediya_setting"><i
-                    class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;Friday, 5 January 2018</a>
-                <div class="d-inline-block fh5co_trading_posotion_relative"><a href="#" class="treding_btn">Trending</a>
+                    class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;{% now "l, j F Y" %}</a>
+                <div class="d-inline-block fh5co_trading_posotion_relative"><a href="#" class="treding_btn">{% trans 'Trending' %}</a>
                     <div class="fh5co_treding_position_absolute"></div>
                 </div>
                 <a href="#" class="color_fff fh5co_mediya_setting">Instagram’s big redesign goes live with black-and-white app</a>
@@ -61,38 +65,61 @@
                 <div class="text-center d-inline-block">
                     <a href="https://fb.com/fh5co" target="_blank" class="fh5co_display_table"><div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div></a>
                 </div>
-                <div class="d-inline-block text-center dd_position_relative ">
-                    <select class="form-control fh5co_text_select_option">
-                        <option>English </option>
-                        <option>French </option>
-                        <option>German </option>
-                        <option>Spanish </option>
-                    </select>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid bg-light border-bottom">
-    <div class="container">
-        <div class="row py-2">
-            <div class="col-12 text-right" id="authButtons">
-                <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm mr-2">Login</a>
-                <a href="{% url 'register' %}" class="btn btn-primary btn-sm">Register</a>
-            </div>
-            <div class="col-12 text-right" id="userProfile" style="display: none;">
-                <div class="dropdown d-inline-block">
-                    <a href="#" class="dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span id="userName">User</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#"><i class="fa fa-user mr-2"></i>Profile</a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-cog mr-2"></i>Settings</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" onclick="logout()"><i class="fa fa-sign-out mr-2"></i>Logout</a>
+
+                <form action="{% url 'set_language' %}" method="post" class="d-inline-block">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                    {% get_current_language as CURRENT_LANG %}
+                    {% get_available_languages as LANGUAGES %}
+                    <div class="d-inline-block text-center dd_position_relative mr-4">
+                        <select name="language" onchange="this.form.submit()" class="form-control fh5co_text_select_option">
+                            {% for lang_code, lang_name in LANGUAGES %}
+                            <option value="{{ lang_code }}" {% if lang_code == CURRENT_LANG %}selected{% endif %}>
+                                {{ lang_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
+                
+                <!-- Auth Buttons moved here -->
+                {% if request.user.is_authenticated %}
+                <div class="d-inline-block ml-3">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #333; text-decoration: none; font-size: 16px; font-weight: 500;">
+                            {% if request.user.profile.photo %}
+                                <img src="{{ request.user.profile.photo.url }}" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 5px;">
+                            {% else %}
+                                <i class="fa fa-user-circle fa-lg"></i>
+                            {% endif %}
+                            {{ request.user.username }} <i class="fa fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="min-width: 150px;">
+                            <a class="dropdown-item" href="{% url 'profile' %}"><i class="fa fa-user mr-2"></i>{% trans 'Visit Profile' %}</a>
+                            <div class="dropdown-divider"></div>
+                            <form method="post" action="{% url 'logout' %}" class="dropdown-item p-0 m-0">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link dropdown-item text-left w-100" style="color: #dc3545; text-decoration: none;">
+                                    <i class="fa fa-sign-out mr-2"></i>{% trans 'Logout' %}
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+                {% else %}
+                <div class="d-inline-block mr-3 ml-3">
+                    <a href="{% url 'login' %}" style="color: #333; text-decoration: none;">
+                        <i class="fa fa-sign-in"></i> {% trans 'Login' %}
+                    </a>
+                </div>
+                <div class="d-inline-block">
+                    <a href="{% url 'register' %}" style="color: #333; text-decoration: none;">
+                        <i class="fa fa-user-plus"></i> {% trans 'Register' %}
+                    </a>
+                </div>
+                {% endif %}
+                
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
@@ -103,38 +130,42 @@
             <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
-            <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt="img" class="mobile_logo_width"/></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="img" class="mobile_logo_width"/></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'home' %}">{% trans 'Home' %} <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                        <a class="nav-link" href="{% url 'blog' %}">{% trans 'Blog' %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'single' %}">Single</a>
+                        {% if about %}
+                        <a class="nav-link" href="{% url 'single' about.id %}">{% trans 'Single' %}</a>
+                        {% else %}
+                        <a class="nav-link" href="#">{% trans 'Single' %}</a>
+                        {% endif %}
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="worldDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">World</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="worldDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'World' %}</a>
                         <div class="dropdown-menu" aria-labelledby="worldDropdown">
-                            <a class="dropdown-item" href="{% url 'politics' %}">Politics</a>
-                            <a class="dropdown-item" href="{% url 'business' %}">Business</a>
-                            <a class="dropdown-item" href="{% url 'technology' %}">Technology</a>
-                            <a class="dropdown-item" href="{% url 'science' %}">Science</a>
+                            <a class="dropdown-item" href="{% url 'politics' %}">{% trans 'Politics' %}</a>
+                            <a class="dropdown-item" href="{% url 'business' %}">{% trans 'Business' %}</a>
+                            <a class="dropdown-item" href="{% url 'technology' %}">{% trans 'Technology' %}</a>
+                            <a class="dropdown-item" href="{% url 'science' %}">{% trans 'Science' %}</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Community</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'Community' %}</a>
                         <div class="dropdown-menu" aria-labelledby="communityDropdown">
-                            <a class="dropdown-item" href="{% url 'forums' %}">Forums</a>
-                            <a class="dropdown-item" href="{% url 'events' %}">Events</a>
-                            <a class="dropdown-item" href="{% url 'members' %}">Members</a>
-                            <a class="dropdown-item" href="{% url 'groups' %}">Groups</a>
+                            <a class="dropdown-item" href="{% url 'forums' %}">{% trans 'Forums' %}</a>
+                            <a class="dropdown-item" href="{% url 'events' %}">{% trans 'Events' %}</a>
+                            <a class="dropdown-item" href="{% url 'members' %}">{% trans 'Members' %}</a>
+                            <a class="dropdown-item" href="{% url 'groups' %}">{% trans 'Groups' %}</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                        <a class="nav-link" href="{% url 'contact' %}">{% trans 'Contact' %}</a>
                     </li>
                 </ul>
             </div>
@@ -149,9 +180,9 @@
             <div class="fh5co_suceefh5co_height"><img src= "{{ i.image.url }}" alt="img"/>
                 <div class="fh5co_suceefh5co_height_position_absolute"></div>
                 <div class="fh5co_suceefh5co_height_position_absolute_font">
-                    <div class=""><a href="{% url 'single' %}" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{ i.date }}
+                    <div class=""><a href="{% url 'single' i.id %}" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{ i.date }}
                     </a></div>
-                    <div class=""><a href="{% url 'single' %}" class="fh5co_good_font"> {{ i.title }} </a></div>
+                    <div class=""><a href="{% url 'single' i.id %}" class="fh5co_good_font"> {{ i.title }} </a></div>
                 </div>
             </div>
         </div>
@@ -166,7 +197,7 @@
                         <div class="fh5co_suceefh5co_height_position_absolute"></div>
                         <div class="fh5co_suceefh5co_height_position_absolute_font_2">
                             <div class=""><a href="#" class="color_fff"> <i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{ i.date }}</a></div>
-                            <div class=""><a href="{% url 'single' %}" class="fh5co_good_font_2"> {{ i.title }} </a></div>
+                            <div class=""><a href="{% url 'single' i.id %}" class="fh5co_good_font_2"> {{ i.title }} </a></div>
                         </div>
                     </div>
                 </div>
@@ -179,25 +210,25 @@
 <div class="container-fluid pt-3">
     <div class="container animate-box" data-animate-effect="fadeIn">
         <div>
-            <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Trending</div>
+            <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">{% trans 'Trending' %}</div>
         </div>
+        <div class="owl-carousel owl-theme js" id="slider1">
         {% for i in trending %}
             {% if forloop.counter0 < 5 %}
-        <div class="owl-carousel owl-theme js" id="slider1">
             <div class="item px-2">
                 <div class="fh5co_latest_trading_img_position_relative">
                     <div class="fh5co_latest_trading_img"><img src="{{ i.image.url }}" alt=""
                                                                class="fh5co_img_special_relative"/></div>
                     <div class="fh5co_latest_trading_img_position_absolute"></div>
                     <div class="fh5co_latest_trading_img_position_absolute_1">
-                        <a href="{% url 'single' %}" class="text-white">{{ i.title }}</a>
-                        <div class="fh5co_latest_trading_date_and_name_color"> {{ i.publisher }} - {{ i.date }}</div>
+                        <a href="{% url 'single' i.id %}" class="text-white">{{ i.title }}</a>
+                        <div class="fh5co_latest_trading_date_and_name_color"> {{ i.publisher }} - {{ i.date }} <span class="ml-2"><i class="fa fa-eye"></i> {{ i.views }}</span></div>
                     </div>
                 </div>
             </div>
-        </div>
             {% endif %}
         {% endfor %}
+        </div>
     </div>
 </div>
 <div class="container-fluid pb-4 pt-5">
@@ -205,21 +236,21 @@
         <div>
             <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">News</div>
         </div>
+        <div class="owl-carousel owl-theme" id="slider2">
         {% for i in news %}
             {% if forloop.counter0 < 4 %}
-        <div class="owl-carousel owl-theme" id="slider2">
             <div class="item px-2">
                 <div class="fh5co_hover_news_img">
                     <div class="fh5co_news_img"><img src="{{ i.image.url }}" alt=""/></div>
                     <div>
-                        <a href="{% url 'single' %}" class="d-block fh5co_small_post_heading"><span class="">{{ i.title }}</span></a>
-                        <div class="c_g"><i class="fa fa-clock-o"></i> {{ i.date }} </div>
+                        <a href="{% url 'single' i.id %}" class="d-block fh5co_small_post_heading"><span class="">{{ i.title }}</span></a>
+                        <div class="c_g"><i class="fa fa-clock-o"></i> {{ i.date }} <span class="ml-2"><i class="fa fa-eye"></i> {{ i.views }}</span></div>
                     </div>
                 </div>
             </div>
-        </div>
             {% endif %}
         {% endfor %}
+        </div>
     </div>
 </div>
 <div class="container-fluid fh5co_video_news_bg pb-4">
@@ -227,22 +258,21 @@
         <div class="fh5co_heading fh5co_heading_border_bottom pt-5 pb-2 mb-4 text-dark">
             Video News
         </div>
-        <div>
+        <div class="owl-carousel owl-theme" id="slider3">
             {% for i in video %}
                 {% if forloop.counter0 < 5 %}
-            <div class="owl-carousel owl-theme" id="slider3">
                 <div class="item px-2">
                     <div class="fh5co_hover_news_img">
                         <div class="fh5co_hover_news_img_video_tag_position_relative">
                             <div class="fh5co_news_img">
-                                <iframe id="video" width="100%" height="200"
+                                <iframe id="video-{{ forloop.counter }}" width="100%" height="200"
                                         src="{{ i.video }}"
                                         frameborder="0" allowfullscreen></iframe>
                             </div>
                             <div class="fh5co_hover_news_img_video_tag_position_absolute fh5co_hide">
                                 <img src="{{ i.image.url }}" alt=""/>
                             </div>
-                            <div class="fh5co_hover_news_img_video_tag_position_absolute_1 fh5co_hide" id="play-video">
+                            <div class="fh5co_hover_news_img_video_tag_position_absolute_1 fh5co_hide" id="play-video-{{ forloop.counter }}">
                                 <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button_1">
                                     <div class="fh5co_hover_news_img_video_tag_position_absolute_1_play_button">
                                         <span><i class="fa fa-play"></i></span>
@@ -253,12 +283,10 @@
                         <div class="pt-2">
                             <a href="#" class="d-block fh5co_small_post_heading fh5co_small_post_heading_1">
                             <span class="">{{ i.title }} </span></a>
-                            <div class="c_g"><i class="fa fa-clock-o"></i>{{ i.date }}</div>
+                            <div class="c_g"><i class="fa fa-clock-o"></i>{{ i.date }} <span class="ml-2"><i class="fa fa-eye"></i> {{ i.views }}</span></div>
                         </div>
                     </div>
                 </div>
-                </div>
-            </div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -266,13 +294,28 @@
 </div>
 <div class="container-fluid pb-4 pt-4 paddding">
     <div class="container paddding">
+        <!-- Search Form -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <form method="GET" action="" class="form-inline">
+                    <div class="input-group w-100">
+                        <input type="text" name="search" class="form-control" placeholder="Search news..." value="{{ search }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-warning" type="submit" style="background: #f5bc04; border-color: #f5bc04;">
+                                <i class="fa fa-search"></i> Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
         <div class="row mx-0">
-            {% for i in listnews %}
-                {% if forloop.counter0 < 4 %}
             <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
                 <div>
                     <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">News</div>
                 </div>
+                {% for i in listnews_paginated %}
                 <div class="row pb-4">
                     <div class="col-md-5">
                         <div class="fh5co_hover_news_img">
@@ -281,28 +324,27 @@
                         </div>
                     </div>
                     <div class="col-md-7 animate-box">
-                        <a href="{% url 'single' %}" class="fh5co_magna py-2"> {{ i.title }} </a> <a href="{% url 'single' %}" class="fh5co_mini_time py-3">
-                        {{ i.publisher }} - {{ i.date }} </a>
+                        <a href="{% url 'single' i.id %}" class="fh5co_magna py-2"> {{ i.title }} </a> <a href="{% url 'single' i.id %}" class="fh5co_mini_time py-3">
+                        {{ i.publisher }} - {{ i.date }} <span class="ml-2"><i class="fa fa-eye"></i> {{ i.views }}</span> </a>
                         <div class="fh5co_consectetur"> {{ i.content }}
                         </div>
                     </div>
                 </div>
+                {% empty %}
+                <p>No news found matching your search.</p>
+                {% endfor %}
+                
             </div>
-               {% endif %}
-            {% endfor %}
             <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
                 <div>
-                    <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Tags</div>
+                    <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">{% trans 'Tags' %}</div>
                 </div>
-                {% for i in category %}
-                <div class="clearfix"></div>
                 <div class="fh5co_tags_all">
-                    <a href="#" class="fh5co_tagg">{{ i.name }}</a>
+                    {% for i in category %}
+                        <a href="{% url 'category_detail' i.slug %}" class="fh5co_tagg">{{ i.name }}</a>
+                    {% endfor %}
                 </div>
-                <div>
-                {% endfor %}
-                    <div class="fh5co_heading fh5co_heading_border_bottom pt-3 py-2 mb-4">Most Popular</div>
-                </div>
+                <div class="fh5co_heading fh5co_heading_border_bottom pt-3 py-2 mb-4">{% trans 'Most Popular' %}</div>
                 {% for i in trendingnews %}
                     {% if forloop.counter0 < 4 %}
                 <div class="row pb-3">
@@ -311,7 +353,7 @@
                     </div>
                     <div class="col-7 paddding">
                         <div class="most_fh5co_treding_font">{{ i.title }}</div>
-                        <div class="most_fh5co_treding_font_123"> {{ i.date }}</div>
+                        <div class="most_fh5co_treding_font_123"> {{ i.date }} <span class="ml-1"><i class="fa fa-eye"></i> {{ i.views }}</span></div>
                     </div>
                 </div>
                     {% endif %}
@@ -320,54 +362,66 @@
         </div>
         <div class="row mx-0 animate-box" data-animate-effect="fadeInUp">
             <div class="col-12 text-center pb-4 pt-4">
-                <a href="#" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Previous</a>
-                <a href="#" class="btn_pagging">1</a>
-                <a href="#" class="btn_pagging">2</a>
-                <a href="#" class="btn_pagging">3</a>
-                <a href="#" class="btn_pagging">...</a>
-                <a href="#" class="btn_mange_pagging">Next <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
+                {% if listnews_paginated.has_other_pages %}
+                    {% if listnews_paginated.has_previous %}
+                        <a href="?page={{ listnews_paginated.previous_page_number }}{% if search %}&search={{ search }}{% endif %}{% if category_slug %}&category={{ category_slug }}{% endif %}" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Previous</a>
+                    {% else %}
+                        <span class="btn_mange_pagging disabled" style="opacity: 0.5;"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Previous</span>
+                    {% endif %}
+                    
+                    {% for num in listnews_paginated.paginator.page_range %}
+                        {% if num == listnews_paginated.number %}
+                            <span class="btn_pagging active" style="background: #f5bc04; color: white;">{{ num }}</span>
+                        {% else %}
+                            <a href="?page={{ num }}{% if search %}&search={{ search }}{% endif %}{% if category_slug %}&category={{ category_slug }}{% endif %}" class="btn_pagging">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if listnews_paginated.has_next %}
+                        <a href="?page={{ listnews_paginated.next_page_number }}{% if search %}&search={{ search }}{% endif %}{% if category_slug %}&category={{ category_slug }}{% endif %}" class="btn_mange_pagging">Next <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;</a>
+                    {% else %}
+                        <span class="btn_mange_pagging disabled" style="opacity: 0.5;">Next <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp;</span>
+                    {% endif %}
+                {% endif %}
              </div>
         </div>
     </div>
 </div>
+
+{% include 'includes/lastly_modified.html' %}
+
 <div class="container-fluid fh5co_footer_bg pb-3">
     <div class="container animate-box">
         <div class="row">
+            {% for i in about_description %}
             <div class="col-12 spdp_right py-5"><img src="{% static 'images/white_logo.png' %}" alt="img" class="footer_logo"/></div>
             <div class="clearfix"></div>
             <div class="col-12 col-md-4 col-lg-3">
                 <div class="footer_main_title py-3"> About</div>
-                <div class="footer_sub_about pb-3"> Lorem Ipsum is simply dummy text of the printing and typesetting
-                    industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                    unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </div>
+                <div class="footer_sub_about pb-3"> {{ i.description }}</div>
                 <div class="footer_mediya_icon">
                     <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle"><i class="fa fa-linkedin"></i></div>
+                        <div class="fh5co_verticle_middle"><i class="fa fa-linkedin"> {{ i.url_in }} </i></div>
                     </a></div>
                     <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle"><i class="fa fa-google-plus"></i></div>
+                        <div class="fh5co_verticle_middle"><i class="fa fa-google-plus"> {{ i.url_google }}</i></div>
                     </a></div>
                     <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle"><i class="fa fa-twitter"></i></div>
+                        <div class="fh5co_verticle_middle"><i class="fa fa-twitter"> {{ i.url_twitter }} </i></div>
                     </a></div>
                     <div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div>
+                        <div class="fh5co_verticle_middle"><i class="fa fa-facebook">{{ i.url_facebook }}</i></div>
                     </a></div>
                 </div>
             </div>
+            {% endfor %}
             <div class="col-12 col-md-3 col-lg-2">
                 <div class="footer_main_title py-3"> Category</div>
+                {% for i in category %}
                 <ul class="footer_menu">
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Business</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Entertainment</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Environment</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Health</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Life style</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Politics</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Technology</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; World</a></li>
+                    <li><a href="#" class=""><i class="fa fa-angle-right"></i> {{ i.name }}</a></li>
                 </ul>
+                {% endfor %}
             </div>
             <div class="col-12 col-md-5 col-lg-3 position_footer_relative">
                 <div class="footer_main_title py-3"> Most Viewed Posts</div>
@@ -379,43 +433,40 @@
                 <a href="#" class="footer_post pb-4"> Success is not a good teacher failure makes you humble </a>
                 <div class="footer_position_absolute"><img src="{% static 'images/footer_sub_tipik.png' %}" alt="img" class="width_footer_sub_img"/></div>
             </div>
+            {% for i in lastly %}
+                {% if forloop.counter0 < 15 %}
             <div class="col-12 col-md-12 col-lg-4 ">
                 <div class="footer_main_title py-3"> Last Modified Posts</div>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/allef-vinicius-108153.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/32-450x260.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/download%20(1).jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/science-578x362.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/vil-son-35490.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/zack-minor-15104.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/download.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/download%20(2).jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/ryan-moreno-98837.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/science-578x362.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/vil-son-35490.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/zack-minor-15104.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/download.jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/download%20(2).jpg' %}" alt="img"/></a>
-                <a href="#" class="footer_img_post_6"><img src="{% static 'images/ryan-moreno-98837.jpg' %}" alt="img"/></a>
+                <a href="#" class="footer_img_post_6"><img src="{{ i.image.url }}" alt="img"/></a>
             </div>
-        </div>
-        <div class="row justify-content-center pt-2 pb-4">
-            <div class="col-12 col-md-8 col-lg-7 ">
-                <div class="input-group">
-                    <span class="input-group-addon fh5co_footer_text_box" id="basic-addon1"><i class="fa fa-envelope"></i></span>
-                    <input type="text" class="form-control fh5co_footer_text_box" placeholder="Enter your email..." aria-describedby="basic-addon1">
-                    <a href="#" class="input-group-addon fh5co_footer_subcribe" id="basic-addon12"> <i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;Subscribe</a>
+                {% endif %}
+            {% endfor %}
+            </div>
+
+            <div class="row justify-content-center pt-2 pb-4">
+                <div class="col-12 col-md-8 col-lg-7">
+                    <div class="input-group">
+                        <span class="input-group-addon fh5co_footer_text_box" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+                        <form method="POST" action="{% url 'newsletter_subscribe' %}" class="d-flex w-100">
+                            {% csrf_token %}
+                            <input type="email" name="email" class="form-control fh5co_footer_text_box" placeholder="Enter your email..." aria-describedby="basic-addon1" required>
+                            <button type="submit" class="input-group-addon fh5co_footer_subcribe" id="basic-addon12">
+                                <i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;Subscribe
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+
     </div>
 </div>
+
 <div class="container-fluid fh5co_footer_right_reserved">
     <div class="container">
         <div class="row  ">
             <div class="col-12 col-md-6 py-4 Reserved"> &copy; Copyright 2018, All rights reserved. Design by <a href="https://freehtml5.co" title="Free HTML5 Bootstrap templates">FreeHTML5.co</a>. </div>
             <div class="col-12 col-md-6 spdp_right py-4">
                 <a href="{% url 'home' %}" class="footer_last_part_menu">Home</a>
-                <a href="{% url 'about' %}" class="footer_last_part_menu">About</a>
                 <a href="{% url 'contact' %}" class="footer_last_part_menu">Contact</a>
                 <a href="{% url 'blog' %}" class="footer_last_part_menu">Latest News</a></div>
         </div>
@@ -430,78 +481,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="{% static 'js/bootstrap.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
 <!-- Waypoints -->
 <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
 <!-- Main -->
 <script src="{% static 'js/main.js' %}"></script>
-
-<!-- Authentication Script -->
-<script>
-// Simple authentication state management
-let currentUser = null;
-
-// Check if user is logged in (from localStorage or session)
-function checkAuthState() {
-    console.log('Checking auth state...');
-    const savedUser = localStorage.getItem('currentUser');
-    console.log('Saved user:', savedUser);
-    
-    if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        console.log('Current user:', currentUser);
-        showUserProfile();
-    } else {
-        console.log('No saved user found');
-        showAuthButtons();
-    }
-}
-
-// Show login/register buttons
-function showAuthButtons() {
-    console.log('Showing auth buttons');
-    const authButtons = document.getElementById('authButtons');
-    const userProfile = document.getElementById('userProfile');
-    
-    if (authButtons) authButtons.style.display = 'block';
-    if (userProfile) userProfile.style.display = 'none';
-}
-
-// Show user profile dropdown
-function showUserProfile() {
-    console.log('Showing user profile');
-    const authButtons = document.getElementById('authButtons');
-    const userProfile = document.getElementById('userProfile');
-    const userName = document.getElementById('userName');
-    
-    if (authButtons) authButtons.style.display = 'none';
-    if (userProfile) userProfile.style.display = 'block';
-    
-    if (currentUser && userName) {
-        userName.textContent = currentUser.name || currentUser.email || 'User';
-        console.log('User name set to:', userName.textContent);
-    }
-}
-
-// Logout function
-function logout() {
-    console.log('Logging out...');
-    currentUser = null;
-    localStorage.removeItem('currentUser');
-    showAuthButtons();
-    location.reload(); // Reload to update the page
-}
-
-// Check auth state immediately when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', checkAuthState);
-} else {
-    checkAuthState(); // DOM already loaded
-}
-
-// Also check on window load as backup
-window.addEventListener('load', checkAuthState);
-</script>
 
 </body>
 </html>

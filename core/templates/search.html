@@ -1,0 +1,253 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans 'Search Results' %} - 24 News</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <!-- Simple Nav -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="24 News" height="40">
+            </a>
+            <a href="{% url 'home' %}" class="btn btn-outline-primary btn-sm">{% trans 'Home' %}</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid pb-4 pt-4 paddding">
+        <div class="container paddding">
+            <div class="row mx-0">
+                <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">
+                        {% trans 'Search Results' %}
+                        {% if query %}
+                            <span class="text-muted"> - "{{ query }}"</span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Search Form -->
+                    <div class="mb-4">
+                        <form method="GET" action="{% url 'search' %}" class="form-inline">
+                            <div class="input-group w-100">
+                                <input type="text" name="q" class="form-control" placeholder="{% trans 'Search news...' %}" value="{{ query|default:'' }}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search"></i> {% trans 'Search' %}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Filters -->
+                    {% if query %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form method="GET" action="{% url 'search' %}">
+                                <input type="hidden" name="q" value="{{ query }}">
+                                
+                                <div class="row">
+                                    <!-- Type Filter -->
+                                    <div class="col-md-3 mb-3">
+                                        <label class="small text-muted">{% trans 'Content Type' %}</label>
+                                        <select name="filter" class="form-control form-control-sm">
+                                            <option value="all" {% if filter_type == 'all' %}selected{% endif %}>{% trans 'All Types' %}</option>
+                                            <option value="news" {% if filter_type == 'news' %}selected{% endif %}>{% trans 'News' %}</option>
+                                            <option value="video" {% if filter_type == 'video' %}selected{% endif %}>{% trans 'Videos' %}</option>
+                                            <option value="trending" {% if filter_type == 'trending' %}selected{% endif %}>{% trans 'Trending' %}</option>
+                                            <option value="list" {% if filter_type == 'list' %}selected{% endif %}>{% trans 'List' %}</option>
+                                            <option value="single" {% if filter_type == 'single' %}selected{% endif %}>{% trans 'Articles' %}</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Category Filter -->
+                                    <div class="col-md-3 mb-3">
+                                        <label class="small text-muted">{% trans 'Category' %}</label>
+                                        <select name="category" class="form-control form-control-sm">
+                                            <option value="">{% trans 'All Categories' %}</option>
+                                            {% for cat in category %}
+                                            <option value="{{ cat.slug }}" {% if category_slug == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Sort By -->
+                                    <div class="col-md-3 mb-3">
+                                        <label class="small text-muted">{% trans 'Sort By' %}</label>
+                                        <select name="sort" class="form-control form-control-sm">
+                                            <option value="date_desc" {% if sort_by == 'date_desc' %}selected{% endif %}>{% trans 'Newest First' %}</option>
+                                            <option value="date_asc" {% if sort_by == 'date_asc' %}selected{% endif %}>{% trans 'Oldest First' %}</option>
+                                            <option value="views_desc" {% if sort_by == 'views_desc' %}selected{% endif %}>{% trans 'Most Viewed' %}</option>
+                                            <option value="views_asc" {% if sort_by == 'views_asc' %}selected{% endif %}>{% trans 'Least Viewed' %}</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Date Range -->
+                                    <div class="col-md-3 mb-3">
+                                        <label class="small text-muted">{% trans 'Date Range' %}</label>
+                                        <div class="input-group input-group-sm">
+                                            <input type="date" name="date_from" class="form-control" value="{{ date_from }}" placeholder="From">
+                                            <input type="date" name="date_to" class="form-control" value="{{ date_to }}" placeholder="To">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-filter"></i> {% trans 'Apply Filters' %}
+                                    </button>
+                                    <a href="{% url 'search' %}?q={{ query }}" class="btn btn-outline-secondary btn-sm ml-2">
+                                        {% trans 'Clear' %}
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Count -->
+                    <div class="mb-3 text-muted">
+                        {% trans 'Found' %} <strong>{{ total_results }}</strong> {% trans 'results' %}
+                    </div>
+                    {% endif %}
+                        
+                        {% for article in results %}
+                        <div class="row pb-4 mb-4 border-bottom">
+                            <div class="col-md-4">
+                                <div class="fh5co_hover_news_img">
+                                    <div class="fh5co_news_img">
+                                        {% if article.image %}
+                                            <img src="{{ article.image.url }}" alt="{{ article.title }}" class="img-fluid">
+                                        {% else %}
+                                            <img src="{% static 'images/no-image.jpg' %}" alt="{% trans 'No Image' %}" class="img-fluid">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 animate-box">
+                                <a href="{% url 'single' article.id %}" class="fh5co_magna py-2 d-block">{{ article.title }}</a>
+                                <div class="fh5co_mini_time py-1">
+                                    {% if article.category %}
+                                        <span class="badge badge-primary mr-2">{{ article.category }}</span>
+                                    {% endif %}
+                                    <span class="text-muted">{{ article.date|date:"F d, Y" }}</span>
+                                    <span class="ml-2"><i class="fa fa-eye"></i> {{ article.views|default:0 }}</span>
+                                </div>
+                                {% if article.content %}
+                                    <div class="fh5co_consectetur text-muted">
+                                        {{ article.content|truncatewords:30 }}
+                                    </div>
+                                {% endif %}
+                                {% if article.publisher %}
+                                    <small class="text-muted">{% trans 'By' %} {{ article.publisher }}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        <!-- Pagination -->
+                        {% if results.has_other_pages %}
+                        <nav aria-label="{% trans 'Search results pages' %}">
+                            <ul class="pagination justify-content-center">
+                                {% if results.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?q={{ query }}&page={{ results.previous_page_number }}">{% trans 'Previous' %}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">{% trans 'Previous' %}</span>
+                                    </li>
+                                {% endif %}
+                                
+                                {% for num in results.paginator.page_range %}
+                                    {% if results.number == num %}
+                                        <li class="page-item active">
+                                            <span class="page-link">{{ num }}</span>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?q={{ query }}&page={{ num }}">{{ num }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                {% if results.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?q={{ query }}&page={{ results.next_page_number }}">{% trans 'Next' %}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">{% trans 'Next' %}</span>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                        {% endif %}
+                    {% else %}
+                        {% if query %}
+                            <div class="text-center py-5">
+                                <i class="fa fa-search fa-3x text-muted mb-3"></i>
+                                <h4>{% trans 'No results found' %}</h4>
+                                <p class="text-muted">{% trans 'We could not find any results for' %} "{{ query }}"</p>
+                                <p>{% trans 'Try different keywords or check your spelling' %}</p>
+                            </div>
+                        {% else %}
+                            <div class="text-center py-5">
+                                <i class="fa fa-search fa-3x text-muted mb-3"></i>
+                                <h4>{% trans 'Search for news' %}</h4>
+                                <p class="text-muted">{% trans 'Enter keywords to find articles, videos, and more' %}</p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+                    <div>
+                        <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">{% trans 'Trending' %}</div>
+                    </div>
+                    <div class="clearfix"></div>
+                    {% for news in trendingnews|slice:":5" %}
+                    <div class="row pb-3">
+                        <div class="col-5 align-self-center">
+                            <img src="{{ news.image.url }}" alt="{{ news.title }}" class="fh5co_most_trading"/>
+                        </div>
+                        <div class="col-7 paddding">
+                            <div class="most_fh5co_treding_font">{{ news.title|truncatechars:40 }}</div>
+                            <div class="most_fh5co_treding_font_123">{{ news.date|date:"F d, Y" }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="mt-4">
+                        <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">{% trans 'Categories' %}</div>
+                    </div>
+                    <ul class="list-unstyled">
+                        {% for cat in category %}
+                        <li class="mb-2">
+                            <a href="{% url 'category_detail' cat.slug %}" class="text-dark">
+                                <i class="fa fa-chevron-right mr-2"></i>{{ cat.name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple Footer -->
+    <footer class="bg-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0 text-muted">&copy; 2024 24 News. {% trans 'All rights reserved.' %}</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

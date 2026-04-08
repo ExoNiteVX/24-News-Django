@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe to Newsletter</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            max-width: 500px;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: #f5bc04;
+            border-radius: 10px 10px 0 0;
+            border-bottom: none;
+        }
+        .btn-primary {
+            background-color: #f5bc04;
+            border-color: #f5bc04;
+        }
+        .btn-primary:hover {
+            background-color: #e0a800;
+            border-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header text-white">
+            <h4 class="mb-0"><i class="fa fa-envelope mr-2"></i>Subscribe to Newsletter</h4>
+        </div>
+        <div class="card-body p-4">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <p class="text-muted">Enter your email address to receive our latest news and updates.</p>
+
+            <form method="POST" action="{% url 'newsletter_subscribe' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email"
+                           class="form-control"
+                           id="email"
+                           name="email"
+                           placeholder="Enter your email"
+                           required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fa fa-paper-plane mr-2"></i>Subscribe
+                </button>
+            </form>
+
+            <hr>
+
+            <p class="text-center mb-0">
+                <a href="{% url 'home' %}" class="small">
+                    <i class="fa fa-arrow-left mr-1"></i>Back to Home
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% load static %}
+<!-- Lastly Modified Section -->
+<div class="container-fluid pb-4 pt-4 paddding">
+    <div class="container paddding">
+        <div class="row mx-0">
+            <div class="col-12 animate-box" data-animate-effect="fadeIn">
+                <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Lastly Modified</div>
+            </div>
+            {% for page in lastly_modified_pages %}
+            <div class="col-md-3 col-sm-6 animate-box" data-animate-effect="fadeIn">
+                <div class="fh5co_hover_news_img">
+                    <div class="fh5co_news_img">
+                        <img src="{% if page.image %}{{ page.image.url }}{% else %}{% static 'images/no-image.png' %}{% endif %}" alt="{{ page.title }}"/>
+                    </div>
+                    <div></div>
+                </div>
+                <div class="pt-2">
+                    <a href="{% url 'single' page.id %}" class="d-block fh5co_small_post_heading">{{ page.title }}</a>
+                    <div class="c_g"><i class="fa fa-clock-o"></i> {{ page.updated_at|date:"M d, Y" }}</div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p>No recently modified pages.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

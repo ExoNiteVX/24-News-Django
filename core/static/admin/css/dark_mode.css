@@ -1,0 +1,341 @@
+/* ============================================
+   UNIVERSAL DARK MODE OVERRIDE
+   ============================================ */
+
+/* Force everything to inherit dark background by default */
+* {
+    background-color: transparent;
+}
+
+/* Force html and body to dark */
+html, body {
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+/* Force dark mode - override any light theme styles */
+html,
+body,
+#container,
+#header,
+#main,
+#content,
+#content-main,
+.content,
+.main,
+.module,
+.form-row,
+fieldset,
+.inline-group,
+.submit-row,
+.object-tools,
+#changelist,
+#changelist-filter,
+.paginator,
+#toolbar,
+.actions,
+#content-related,
+.app-list,
+.model-list,
+#content {
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+/* Override any bg-white classes */
+[class*="bg-white"],
+.bg-white,
+[class*="bg-white-"],
+[style*="background-color: white"],
+[style*="background-color: #fff"],
+[style*="background-color: #ffffff"],
+[style*="background: white"],
+[style*="background: #fff"],
+[style*="background: #ffffff"],
+[style*="background-color: rgb(255"],
+[style*="background: rgb(255"] {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+}
+
+/* Fix Unfold specific light backgrounds - TARGET bg-base classes */
+[class*="bg-base-50"],
+[class*="bg-base-100"],
+[class*="bg-base-200"],
+.bg-base-50,
+.bg-base-100,
+.bg-base-200 {
+    background-color: #0f172a !important;
+}
+
+/* CRITICAL: Override any white backgrounds on all elements */
+* {
+    background-color: transparent;
+}
+
+html * {
+    background-color: inherit;
+}
+
+/* But then set dark backgrounds on specific containers */
+html,
+body {
+    background-color: #0f172a !important;
+}
+
+/* Dark background for panels */
+.bg-white,
+[class*="bg-white"],
+.form-row,
+.module,
+.inline-group,
+.submit-row,
+.object-tools,
+#changelist,
+#changelist-filter,
+.paginator,
+#toolbar,
+.actions,
+.card,
+.panel,
+.form-container,
+.form-panel,
+.panel-content {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #e2e8f0 !important;
+}
+
+/* Text colors */
+[class*="text-gray-900"],
+.text-gray-900,
+[class*="text-gray-800"],
+.text-gray-800 {
+    color: #e2e8f0 !important;
+}
+
+[class*="text-gray-600"],
+.text-gray-600,
+[class*="text-gray-500"],
+.text-gray-500,
+[class*="text-gray-400"],
+.text-gray-400 {
+    color: #94a3b8 !important;
+}
+
+/* Borders */
+[class*="border-gray-200"],
+.border-gray-200,
+[class*="border-gray-300"],
+.border-gray-300,
+.border-base-200,
+[class*="border-base-200"] {
+    border-color: #334155 !important;
+}
+
+/* Links */
+a,
+a:link,
+a:visited {
+    color: #60a5fa !important;
+}
+
+a:hover {
+    color: #93c5fd !important;
+}
+
+/* Form inputs - CRITICAL for password change page */
+input,
+textarea,
+select,
+.vTextField,
+.vURLField,
+vLargeTextField,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="url"],
+input[type="tel"],
+.form-control,
+.input {
+    background-color: #334155 !important;
+    background: #334155 !important;
+    color: #e2e8f0 !important;
+    border-color: #475569 !important;
+    border: 1px solid #475569 !important;
+}
+
+/* Input focus states */
+input:focus,
+textarea:focus,
+select:focus,
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background-color: #334155 !important;
+    color: #e2e8f0 !important;
+    border-color: #3b82f6 !important;
+    outline: none !important;
+}
+
+/* Placeholder text */
+input::placeholder,
+textarea::placeholder {
+    color: #64748b !important;
+}
+
+/* Labels */
+label,
+.form-label,
+.field-label {
+    color: #e2e8f0 !important;
+}
+
+/* Tables */
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #e2e8f0 !important;
+    border-color: #334155 !important;
+}
+
+/* List items */
+li {
+    background-color: transparent !important;
+}
+
+/* App list */
+.app-module,
+.model-module,
+.app-list .module,
+.model-list .module {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+}
+
+/* Header */
+#header {
+    background-color: #0f172a !important;
+    background: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+/* Sidebar */
+#nav-sidebar,
+.toggle-nav-sidebar,
+.sidebar {
+    background-color: #0f172a !important;
+    background: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+/* Footer */
+#footer {
+    background-color: #0f172a !important;
+    background: #0f172a !important;
+    color: #94a3b8 !important;
+}
+
+/* Buttons */
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+.btn {
+    background-color: #3b82f6 !important;
+    background: #3b82f6 !important;
+    color: white !important;
+    border-color: #3b82f6 !important;
+}
+
+/* Password change form specific */
+.passwordchange input,
+.passwordchange label,
+.form-row.field-password1 input,
+.form-row.field-password2 input,
+.form-row.field-old_password input,
+.form-row.field-new_password1 input,
+.form-row.field-new_password2 input {
+    background-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+
+/* Fieldset groups - CRITICAL for password change and forms */
+fieldset,
+fieldset.module,
+.fieldset-group,
+.form-group,
+.form-section,
+.border-base-200,
+[class*="fieldset"],
+[class*="form-group"],
+[class*="border-base-200"],
+[class*="border-base-300"],
+.rounded-default,
+.shadow-xs {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    border: 1px solid #334155 !important;
+}
+
+/* Fix form containers on all pages */
+.form-container,
+.form-panel,
+.panel-content,
+.form-content,
+.form-body {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+}
+
+/* Fix any remaining white elements */
+[style*="background: rgb(255"],
+[style*="background-color: rgb(255"],
+[style*="background: #ffffff"],
+[style*="background-color: #ffffff"],
+[style*="background: #fff"],
+[style*="background-color: #fff"] {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+}
+
+/* Ensure all divs have dark backgrounds */
+div:not(.button):not(.btn):not(input):not(select):not(textarea) {
+    background-color: inherit;
+}
+
+/* Fix for absolutely positioned elements */
+.absolute,
+.fixed,
+.sticky {
+    background-color: #1e293b !important;
+}
+
+/* Unfold specific container overrides */
+.unfold-content,
+.unfold-main,
+.unfold-container,
+.unfold-body,
+.unfold-wrapper {
+    background-color: #0f172a !important;
+    background: #0f172a !important;
+}
+
+/* Help text */
+.help,
+.help-text,
+.form-help {
+    color: #94a3b8 !important;
+}
+
+/* Error messages */
+.errornote,
+.errorlist {
+    color: #ef4444 !important;
+}

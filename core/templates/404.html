@@ -1,0 +1,93 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans 'Page Not Found' %} - 24 News</title>
+    <link href="{% static 'css/bootstrap.min.css' %}", rel="stylesheet">
+    <link href="{% static 'css/style.css' %}", rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}", rel="stylesheet">
+    <style>
+        .error-page {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .error-code {
+            font-size: 120px;
+            font-weight: 700;
+            color: #f5bc04;
+            line-height: 1;
+        }
+        .error-message {
+            font-size: 24px;
+            color: #333;
+            margin: 20px 0;
+        }
+        .error-description {
+            color: #777;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'includes/header.html' %}
+
+    <div class="error-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="error-code">404</div>
+                    <h2 class="error-message">{% trans 'Page Not Found' %}</h2>
+                    <p class="error-description">
+                        {% trans "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable." %}
+                    </p>
+                    
+                    <div class="mb-4">
+                        <a href="{% url 'home' %}" class="btn btn-primary btn-lg mr-2">
+                            <i class="fa fa-home"></i> {% trans 'Go Home' %}
+                        </a>
+                        <a href="{% url 'blog' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="fa fa-newspaper-o"></i> {% trans 'View News' %}
+                        </a>
+                    </div>
+                    
+                    <!-- Search -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <form method="GET" action="{% url 'search' %}" class="mt-4">
+                                <div class="input-group">
+                                    <input type="text" name="q" class="form-control" placeholder="{% trans 'Search for articles...' %}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-warning" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Popular Links -->
+                    <div class="mt-5">
+                        <h5 class="mb-3">{% trans 'Popular Categories' %}</h5>
+                        <div class="d-flex justify-content-center flex-wrap">
+                            <a href="{% url 'technology' %}" class="btn btn-outline-secondary m-1">{% trans 'Technology' %}</a>
+                            <a href="{% url 'politics' %}" class="btn btn-outline-secondary m-1">{% trans 'Politics' %}</a>
+                            <a href="{% url 'business' %}" class="btn btn-outline-secondary m-1">{% trans 'Business' %}</a>
+                            <a href="{% url 'science' %}" class="btn btn-outline-secondary m-1">{% trans 'Science' %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'includes/footer.html' %}
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

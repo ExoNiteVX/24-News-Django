@@ -111,6 +111,7 @@
       <change beforePath="$PROJECT_DIR$/../face ai recreatioin/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../face ai recreatioin/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../face ai recreatioin/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../portfolio" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../telegram bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../telegram bot/main.py" afterDir="false" />
     </list>
@@ -127,16 +128,16 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/core" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="3BYraflF4sZ1vzMGxNIFOr3NjNi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -150,7 +151,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "to.speed.mode.migration.done": "true"
   }

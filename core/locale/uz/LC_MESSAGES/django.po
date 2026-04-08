@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-31 15:12+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\templates\blog.html:82 .\templates\index.html:91
+msgid "Visit Profile"
+msgstr "Profilni ko'rish"
+
+#: .\templates\blog.html:87 .\templates\index.html:96
+msgid "Logout"
+msgstr "Chiqish"
+
+#: .\templates\blog.html:96 .\templates\index.html:105
+msgid "Login"
+msgstr "Kirish"
+
+#: .\templates\blog.html:101 .\templates\index.html:110
+msgid "Register"
+msgstr "Ro'yxatdan o'tish"
+
+#: .\templates\index.html:36 .\templates\index.html:206
+msgid "Trending"
+msgstr "Trendda"
+
+#: .\templates\index.html:130
+msgid "Home"
+msgstr "Bosh sahifa"
+
+#: .\templates\index.html:133
+msgid "Blog"
+msgstr "Blog"
+
+#: .\templates\index.html:137 .\templates\index.html:139
+msgid "Single"
+msgstr "Yagona"
+
+#: .\templates\index.html:143
+msgid "World"
+msgstr "Dunyo"
+
+#: .\templates\index.html:145
+msgid "Politics"
+msgstr "Siyosat"
+
+#: .\templates\index.html:146
+msgid "Business"
+msgstr "Biznes"
+
+#: .\templates\index.html:147
+msgid "Technology"
+msgstr "Texnologiya"
+
+#: .\templates\index.html:148
+msgid "Science"
+msgstr "Fan"
+
+#: .\templates\index.html:152
+msgid "Community"
+msgstr "Jamiyat"
+
+#: .\templates\index.html:154
+msgid "Forums"
+msgstr "Forumlar"
+
+#: .\templates\index.html:155
+msgid "Events"
+msgstr "Tadbirlar"
+
+#: .\templates\index.html:156
+msgid "Members"
+msgstr "A'zolar"
+
+#: .\templates\index.html:157
+msgid "Groups"
+msgstr "Guruhlar"
+
+#: .\templates\index.html:161
+msgid "Contact"
+msgstr "Aloqa"
+
+#: .\templates\index.html:316
+msgid "Tags"
+msgstr "Teglar"
+
+#: .\templates\index.html:323
+msgid "Most Popular"
+msgstr "Eng mashhur"
+
+#: .\templates\profile.html:184
+msgid "Profile Photo"
+msgstr "Profil fotosi"
+
+#: .\templates\profile.html:189
+msgid "Upload a new profile photo"
+msgstr "Yangi fotosurat yuklash"
+
+#: .\templates\profile.html:193
+msgid "Bio"
+msgstr "Biografiya"
+
+#: .\templates\profile.html:194
+msgid "Tell us about yourself"
+msgstr "O'zingiz haqingizda gapirib bering"
+
+#: .\templates\profile.html:198
+msgid "Phone Number"
+msgstr "Telefon raqami"
+
+#: .\templates\profile.html:199
+msgid "Enter your phone number"
+msgstr "Telefon raqamingizni kiriting"

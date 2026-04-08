@@ -1,0 +1,118 @@
+{% extends 'unfold/layouts/base.html' %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+/* Universal Dark Mode Override */
+* { background-color: transparent; }
+
+html, body, #container, #header, #main, #content, #content-main {
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+/* All modules and panels */
+.module, .form-row, fieldset, .inline-group, .submit-row, .object-tools,
+#changelist, #changelist-filter, .paginator, #toolbar, .actions,
+.card, .panel, .form-container, .form-panel, .panel-content,
+.app-list, .model-list, .app-module, .model-module {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #e2e8f0 !important;
+    border-color: #334155 !important;
+}
+
+/* Fieldsets - CRITICAL for password change */
+fieldset, fieldset.module, .fieldset-group, .form-group, .form-section,
+.border-base-200, [class*="border-base-200"], [class*="border-base-300"],
+.rounded-default, .shadow-xs, .mb-6, .p-3 {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    border: 1px solid #334155 !important;
+}
+
+/* Override all white backgrounds */
+[class*="bg-white"], .bg-white, [class*="bg-white-50"], [class*="bg-white-100"],
+[style*="background-color: white"], [style*="background-color: #fff"],
+[style*="background-color: #ffffff"], [style*="background-color: rgb(255"],
+[style*="background: white"], [style*="background: #fff"] {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+}
+
+/* Unfold specific */
+[class*="bg-base-50"], [class*="bg-base-100"], [class*="bg-base-200"],
+.bg-base-50, .bg-base-100, .bg-base-200 {
+    background-color: #0f172a !important;
+}
+
+/* Form inputs */
+input, textarea, select, input[type="text"], input[type="password"],
+input[type="email"], input[type="number"], input[type="url"], input[type="tel"],
+.vTextField, .vURLField, .vLargeTextField, .form-control, .input {
+    background-color: #334155 !important;
+    background: #334155 !important;
+    color: #e2e8f0 !important;
+    border: 1px solid #475569 !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    background-color: #334155 !important;
+    border-color: #3b82f6 !important;
+}
+
+/* Labels */
+label, .form-label, .field-label, label.required, .form-row label {
+    color: #e2e8f0 !important;
+}
+
+/* Text colors */
+[class*="text-gray-900"], .text-gray-900, [class*="text-gray-800"], .text-gray-800 {
+    color: #e2e8f0 !important;
+}
+
+[class*="text-gray-600"], .text-gray-600, [class*="text-gray-500"], .text-gray-500 {
+    color: #94a3b8 !important;
+}
+
+/* Links */
+a, a:link, a:visited { color: #60a5fa !important; }
+a:hover { color: #93c5fd !important; }
+
+/* Tables */
+table, thead, tbody, tr, th, td {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #e2e8f0 !important;
+    border-color: #334155 !important;
+}
+
+/* Sidebar */
+#nav-sidebar, .toggle-nav-sidebar, .sidebar {
+    background-color: #0f172a !important;
+    background: #0f172a !important;
+}
+
+/* Footer */
+#footer, .footer {
+    background-color: #0f172a !important;
+    background: #0f172a !important;
+    color: #94a3b8 !important;
+}
+
+/* Buttons */
+.button, input[type="submit"], input[type="button"], .submit-row input, .btn {
+    background-color: #3b82f6 !important;
+    background: #3b82f6 !important;
+    color: white !important;
+}
+
+/* Help text */
+.help, .help-text, .form-help { color: #94a3b8 !important; }
+
+/* Error messages */
+.errornote, .errorlist { color: #ef4444 !important; }
+</style>
+{% endblock %}

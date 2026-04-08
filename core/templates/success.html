@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Successful</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            max-width: 500px;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .card-header {
+            background: #28a745;
+            border-radius: 10px 10px 0 0;
+            border-bottom: none;
+        }
+        .success-icon {
+            font-size: 64px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #f5bc04;
+            border-color: #f5bc04;
+        }
+        .btn-primary:hover {
+            background-color: #e0a800;
+            border-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header text-white">
+            <h4 class="mb-0"><i class="fa fa-check-circle mr-2"></i>Success!</h4>
+        </div>
+        <div class="card-body p-5">
+            <div class="success-icon">
+                <i class="fa fa-check-circle"></i>
+            </div>
+            <h3 class="mb-3">Thank You!</h3>
+            <p class="text-muted mb-4">Your email has been successfully verified and you are now subscribed to our newsletter.</p>
+            <a href="{% url 'home' %}" class="btn btn-primary btn-lg">
+                <i class="fa fa-home mr-2"></i>Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

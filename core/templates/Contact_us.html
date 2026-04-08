@@ -30,7 +30,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 fh5co_mediya_center"><a href="#" class="color_fff fh5co_mediya_setting"><i
-                    class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;Friday, 5 January 2018</a>
+                    class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;{% now "l, j F Y" %}</a>
                 <div class="d-inline-block fh5co_trading_posotion_relative"><a href="#" class="treding_btn">Trending</a>
                     <div class="fh5co_treding_position_absolute"></div>
                 </div>
@@ -62,7 +62,7 @@
                     <a href="https://fb.com/fh5co" target="_blank" class="fh5co_display_table"><div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div></a>
                 </div>
                 <!--<div class="d-inline-block text-center"><img src="images/country.png" alt="img" class="fh5co_country_width"/></div>-->
-                <div class="d-inline-block text-center dd_position_relative ">
+                <div class="d-inline-block text-center dd_position_relative mr-4">
                     <select class="form-control fh5co_text_select_option">
                         <option>English </option>
                         <option>French </option>
@@ -70,6 +70,44 @@
                         <option>Spanish </option>
                     </select>
                 </div>
+                
+                <!-- Auth Buttons -->
+                {% if request.user.is_authenticated %}
+                <div class="d-inline-block ml-3">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #333; text-decoration: none; font-size: 16px; font-weight: 500;">
+                            {% if request.user.profile.photo %}
+                                <img src="{{ request.user.profile.photo.url }}" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 5px;">
+                            {% else %}
+                                <i class="fa fa-user-circle fa-lg"></i>
+                            {% endif %}
+                            {{ request.user.username }} <i class="fa fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="min-width: 150px;">
+                            <a class="dropdown-item" href="{% url 'profile' %}"><i class="fa fa-user mr-2"></i>Visit Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <form method="post" action="{% url 'logout' %}" class="dropdown-item p-0 m-0">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link dropdown-item text-left w-100" style="color: #dc3545; text-decoration: none;">
+                                    <i class="fa fa-sign-out mr-2"></i>Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="d-inline-block mr-3 ml-3">
+                    <a href="{% url 'login' %}" style="color: #333; text-decoration: none;">
+                        <i class="fa fa-sign-in"></i> Login
+                    </a>
+                </div>
+                <div class="d-inline-block">
+                    <a href="{% url 'register' %}" style="color: #333; text-decoration: none;">
+                        <i class="fa fa-user-plus"></i> Register
+                    </a>
+                </div>
+                {% endif %}
+                
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -81,7 +119,7 @@
             <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
-            <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt="img" class="mobile_logo_width"/></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="img" class="mobile_logo_width"/></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -91,24 +129,26 @@
                         <a class="nav-link" href="{% url 'blog' %}">Blog <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="{% url 'single' %}">Single <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'single' 1 %}">Single <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">World <span class="sr-only">(current)</span></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                            <a class="dropdown-item" href="#">Action in</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="{% url 'politics' %}">Politics</a>
+                            <a class="dropdown-item" href="{% url 'business' %}">Business</a>
+                            <a class="dropdown-item" href="{% url 'technology' %}">Technology</a>
+                            <a class="dropdown-item" href="{% url 'science' %}">Science</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton3" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Community<span class="sr-only">(current)</span></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                            <a class="dropdown-item" href="#">Action in</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="{% url 'forums' %}">Forums</a>
+                            <a class="dropdown-item" href="{% url 'events' %}">Events</a>
+                            <a class="dropdown-item" href="{% url 'members' %}">Members</a>
+                            <a class="dropdown-item" href="{% url 'groups' %}">Groups</a>
                         </div>
                     </li>
                     <li class="nav-item ">
@@ -176,20 +216,23 @@
         </div>
         <div class="row">
             <div class="col-12 col-md-6">
-                <form class="row" id="fh5co_contact_form">
+                <form class="row" id="fh5co_contact_form" method="POST" action="{% url 'contact' %}">
+                    {% csrf_token %}
                     <div class="col-12 py-3">
-                        <input type="text" class="form-control fh5co_contact_text_box" placeholder="Enter Your Name" />
+                        <input type="text" name="name" class="form-control fh5co_contact_text_box" placeholder="Enter Your Name" required />
                     </div>
                     <div class="col-6 py-3">
-                        <input type="text" class="form-control fh5co_contact_text_box" placeholder="E-mail" />
+                        <input type="email" name="email" class="form-control fh5co_contact_text_box" placeholder="E-mail" required />
                     </div>
                     <div class="col-6 py-3">
-                        <input type="text" class="form-control fh5co_contact_text_box" placeholder="Subject" />
+                        <input type="text" name="subject" class="form-control fh5co_contact_text_box" placeholder="Subject" required />
                     </div>
                     <div class="col-12 py-3">
-                        <textarea class="form-control fh5co_contacts_message" placeholder="Message"></textarea>
+                        <textarea name="message" class="form-control fh5co_contacts_message" placeholder="Message" required></textarea>
                     </div>
-                    <div class="col-12 py-3 text-center"> <a href="#" class="btn contact_btn">Send Message</a> </div>
+                    <div class="col-12 py-3 text-center">
+                        <button type="submit" class="btn contact_btn">Send Message</button>
+                    </div>
                 </form>
             </div>
             <div class="col-12 col-md-6 align-self-center">
@@ -274,10 +317,10 @@
 <div class="container-fluid fh5co_footer_right_reserved">
     <div class="container">
         <div class="row  ">
-            <div class="col-12 col-md-6 py-4 Reserved"> © Copyright 2018, All rights reserved. Design by <a href="https://freehtml5.co" title="Free HTML5 Bootstrap templates">FreeHTML5.co</a>. </div>
+            <div class="col-12 col-md-6 py-4 Reserved"> &copy; Copyright 2018, All rights reserved. Design by <a href="https://freehtml5.co" title="Free HTML5 Bootstrap templates">FreeHTML5.co</a>. </div>
             <div class="col-12 col-md-6 spdp_right py-4">
                 <a href="{% url 'home' %}" class="footer_last_part_menu">Home</a>
-                <a href="{% url 'about' %}" class="footer_last_part_menu">About</a>
+                <a href="{% if about %}{% url 'single' about.id %}{% else %}#{% endif %}" class="footer_last_part_menu">About</a>
                 <a href="{% url 'contact' %}" class="footer_last_part_menu">Contact</a>
                 <a href="{% url 'blog' %}" class="footer_last_part_menu">Latest News</a></div>
         </div>
@@ -291,6 +334,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 

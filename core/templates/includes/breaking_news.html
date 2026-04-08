@@ -1,0 +1,64 @@
+{% load i18n %}
+{% load static %}
+<!-- Breaking News Banner -->
+{% if breaking_news %}
+<div id="breaking-news-banner" class="breaking-news-banner" style="display: none;">
+    <div class="container-fluid" style="background: linear-gradient(90deg, #d32f2f 0%, #b71c1c 100%); color: white; padding: 10px 0;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <span class="badge badge-warning text-dark font-weight-bold" style="font-size: 12px; padding: 5px 10px;">
+                        <i class="fa fa-bolt mr-1"></i>{% trans 'BREAKING' %}
+                    </span>
+                </div>
+                <div class="col">
+                    <div class="breaking-news-ticker" style="overflow: hidden; white-space: nowrap;">
+                        <span id="breaking-text" style="display: inline-block; animation: scroll 20s linear infinite;">
+                            {{ breaking_news.title }}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <a href="{% url 'single' breaking_news.id %}" class="btn btn-sm btn-light" style="font-size: 12px;">
+                        {% trans 'Read More' %}
+                    </a>
+                    <button onclick="closeBreakingNews()" class="btn btn-sm btn-link text-white ml-2" style="font-size: 14px;">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes scroll {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+    .breaking-news-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+    }
+</style>
+
+<script>
+    function closeBreakingNews() {
+        document.getElementById('breaking-news-banner').style.display = 'none';
+        localStorage.setItem('breakingNewsClosed', Date.now());
+    }
+    
+    // Show banner after 1 second
+    setTimeout(function() {
+        var lastClosed = localStorage.getItem('breakingNewsClosed');
+        var showAfter = 30 * 60 * 1000; // 30 minutes
+        
+        if (!lastClosed || (Date.now() - lastClosed) > showAfter) {
+            document.getElementById('breaking-news-banner').style.display = 'block';
+        }
+    }, 1000);
+</script>
+{% endif %}

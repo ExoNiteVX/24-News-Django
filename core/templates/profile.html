@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load i18n %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "My Profile" %} - 24 News</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/style_1.css' %}" rel="stylesheet" type="text/css"/>
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .profile-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .profile-header-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 20px;
+            padding: 60px 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--primary-color);
+            font-weight: bold;
+            border: 5px solid rgba(255,255,255,0.3);
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .content-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .btn-modern {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .form-control-modern {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+        }
+
+        .form-control-modern:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: var(--white);
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #edf2f7;
+        }
+
+        .upload-area.drag-over {
+            border-color: #667eea;
+            background: #e6f0ff;
+        }
+
+        .photo-preview-container {
+            transition: transform 0.2s ease;
+        }
+
+        .photo-preview-container:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .fa-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        .btn-modern:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    {% include 'includes/nav.html' %}
+
+<div class="profile-wrapper">
+    <div class="profile-header-card animate-box" data-animate-effect="fadeInUp">
+        <div class="row align-items-center">
+            <div class="col-md-3 text-center">
+                <div class="profile-avatar mx-auto">
+                    {% if profile.photo %}
+                        <img src="{{ profile.photo.url }}" alt="{{ request.user.username }}">
+                    {% else %}
+                        {{ request.user.username|first|upper }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1 class="mb-2">{{ request.user.get_full_name|default:request.user.username }}</h1>
+                <p class="mb-2"><i class="fa fa-at"></i> {{ request.user.username }}</p>
+                <p class="mb-3">{{ profile.bio|default:_("No bio yet. Tell us about yourself!") }}</p>
+                <p><i class="fa fa-calendar"></i> {% trans "Member since" %} {{ request.user.date_joined|date:"F Y" }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <i class="fa fa-file-text"></i>
+                </div>
+                <h3>{{ articles_count|default:"0" }}</h3>
+                <p class="text-muted">{% trans "Articles" %}</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <h3>{{ user_comments|length|default:"0" }}</h3>
+                <p class="text-muted">{% trans "Comments" %}</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <i class="fa fa-bookmark"></i>
+                </div>
+                <h3>{{ bookmarks_count|default:"0" }}</h3>
+                <p class="text-muted">{% trans "Bookmarks" %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content-card animate-box" data-animate-effect="fadeInUp">
+                <h4 class="mb-4"><i class="fa fa-user-edit text-primary"></i> {% trans "Edit Profile" %}</h4>
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="form-group text-center mb-4">
+                        <div class="photo-upload-wrapper" style="position: relative; display: inline-block;">
+                            <label for="photoInput" style="cursor: pointer; margin: 0; display: block;">
+                                {% if profile.photo %}
+                                    <img id="currentPhotoPreview" src="{{ profile.photo.url }}" alt="Profile Photo" 
+                                         style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #667eea;">
+                                {% else %}
+                                    <div id="currentPhotoPreview" class="d-flex flex-column align-items-center justify-content-center bg-light rounded-circle"
+                                         style="width: 150px; height: 150px; border: 3px dashed #667eea; text-align: center; padding: 15px;">
+                                        <i class="fa fa-cloud-upload fa-2x" style="color: #667eea; margin-bottom: 8px;"></i>
+                                        <p class="mb-0" style="font-size: 12px; line-height: 1.4; color: #667eea;">
+                                            <strong>{% trans "Click to upload" %}</strong><br>
+                                            <span style="font-size: 10px; color: #718096;">PNG, JPG, GIF<br>up to 5MB</span>
+                                        </p>
+                                    </div>
+                                {% endif %}
+                            </label>
+                            <input type="file" name="photo" id="photoInput" class="d-none" accept="image/jpeg,image/png,image/jpg,image/gif">
+                            
+                            {% if profile.photo %}
+                            <button type="button" id="removePhotoBtn" class="btn btn-sm btn-danger rounded-circle" 
+                                    style="position: absolute; bottom: 5px; right: 5px; width: 36px; height: 36px; padding: 0;">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+                        
+                        {% if profile.photo %}
+                        <p class="text-muted mt-2 mb-0" style="font-size: 12px;">{% trans "Click photo to change" %}</p>
+                        {% endif %}
+                        
+                        <input type="hidden" name="remove_photo" id="removePhoto" value="false">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>{% trans "Username" %}</label>
+                            <input type="text" name="username" class="form-control-modern" value="{{ request.user.username }}">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>{% trans "Email" %}</label>
+                            <input type="email" name="email" class="form-control-modern" value="{{ request.user.email }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>{% trans "First Name" %}</label>
+                            <input type="text" name="first_name" class="form-control-modern" value="{{ request.user.first_name }}">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>{% trans "Last Name" %}</label>
+                            <input type="text" name="last_name" class="form-control-modern" value="{{ request.user.last_name }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{% trans "Phone" %}</label>
+                        <input type="tel" name="phone" class="form-control-modern" value="{{ profile.phone }}">
+                    </div>
+                    <div class="form-group">
+                        <label>{% trans "Bio" %}</label>
+                        <textarea name="bio" class="form-control-modern" rows="3">{{ profile.bio }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-modern">
+                        <i class="fa fa-save"></i> {% trans "Save Changes" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="content-card animate-box" data-animate-effect="fadeInUp">
+                <h5 class="mb-3"><i class="fa fa-clock text-primary"></i> {% trans "Recent Activity" %}</h5>
+                {% if user_comments %}
+                    {% for comment in user_comments|slice:":5" %}
+                        <div class="mb-3 pb-3 border-bottom">
+                            <small class="text-muted">{{ comment.created_at|timesince }} {% trans "ago" %}</small>
+                            <p class="mb-1">{{ comment.content|truncatechars:80 }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted text-center py-3">{% trans "No recent activity" %}</p>
+                {% endif %}
+            </div>
+
+            <div class="content-card text-center">
+                <a href="{% url 'password_change' %}" class="btn btn-outline-primary btn-block mb-2">
+                    <i class="fa fa-key"></i> {% trans "Change Password" %}
+                </a>
+                <a href="{% url 'my_bookmarks' %}" class="btn btn-outline-warning btn-block">
+                    <i class="fa fa-bookmark"></i> {% trans "My Bookmarks" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'includes/footer.html' %}
+
+<script>
+// Modern Image Upload with Preview
+document.addEventListener('DOMContentLoaded', function() {
+    const photoInput = document.getElementById('photoInput');
+    const uploadArea = document.querySelector('.upload-area');
+    const currentPreview = document.getElementById('currentPhotoPreview');
+    const removePhotoBtn = document.getElementById('removePhotoBtn');
+    const removePhotoField = document.getElementById('removePhoto');
+    
+    // Drag and drop functionality
+    if (uploadArea) {
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        });
+        
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+        });
+        
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                photoInput.files = files;
+                previewImage(files[0]);
+            }
+        });
+    }
+    
+    // File input change handler
+    if (photoInput) {
+        photoInput.addEventListener('change', function(e) {
+            if (this.files && this.files[0]) {
+                previewImage(this.files[0]);
+            }
+        });
+    }
+    
+    // Remove photo handler
+    if (removePhotoBtn) {
+        removePhotoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Clear the preview
+            if (currentPreview) {
+                if (currentPreview.tagName === 'IMG') {
+                    currentPreview.src = '';
+                    currentPreview.style.display = 'none';
+                    // Show placeholder
+                    const placeholder = document.createElement('div');
+                    placeholder.id = 'currentPhotoPreview';
+                    placeholder.className = 'd-flex align-items-center justify-content-center bg-light rounded-circle';
+                    placeholder.style.width = '120px';
+                    placeholder.style.height = '120px';
+                    placeholder.style.border = '3px dashed #667eea';
+                    placeholder.innerHTML = '<i class="fa fa-camera fa-2x text-muted"></i>';
+                    currentPreview.parentNode.replaceChild(placeholder, currentPreview);
+                }
+            }
+            // Clear the file input
+            photoInput.value = '';
+            // Mark for removal
+            if (removePhotoField) {
+                removePhotoField.value = 'true';
+            }
+            // Hide the remove button
+            if (removePhotoBtn) {
+                removePhotoBtn.style.display = 'none';
+            }
+        });
+    }
+    
+    function previewImage(file) {
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
+        if (!validTypes.includes(file.type)) {
+            alert('{% trans "Please upload a valid image file (PNG, JPG, JPEG, GIF)" %}');
+            photoInput.value = '';
+            return;
+        }
+        
+        // Validate file size (5MB max)
+        if (file.size > 5 * 1024 * 1024) {
+            alert('{% trans "File size must be less than 5MB" %}');
+            photoInput.value = '';
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Check if preview container exists and update it
+            const previewContainer = document.querySelector('.photo-preview-container');
+            const currentPhotoDiv = document.getElementById('currentPhotoPreview');
+            
+            if (previewContainer && currentPhotoDiv && currentPhotoDiv.tagName === 'DIV') {
+                // Replace placeholder with image
+                const newImg = document.createElement('img');
+                newImg.id = 'currentPhotoPreview';
+                newImg.src = e.target.result;
+                newImg.alt = 'Profile Photo Preview';
+                newImg.style.width = '120px';
+                newImg.style.height = '120px';
+                newImg.style.borderRadius = '50%';
+                newImg.style.objectFit = 'cover';
+                newImg.style.border = '3px solid #667eea';
+                
+                // Add remove button wrapper
+                const wrapper = document.createElement('div');
+                wrapper.style.position = 'relative';
+                wrapper.style.display = 'inline-block';
+                wrapper.appendChild(newImg);
+                
+                // Add remove button
+                const newRemoveBtn = document.createElement('button');
+                newRemoveBtn.type = 'button';
+                newRemoveBtn.className = 'btn btn-sm btn-danger rounded-circle';
+                newRemoveBtn.style.position = 'absolute';
+                newRemoveBtn.style.bottom = '0';
+                newRemoveBtn.style.right = '0';
+                newRemoveBtn.style.width = '32px';
+                newRemoveBtn.style.height = '32px';
+                newRemoveBtn.style.padding = '0';
+                newRemoveBtn.innerHTML = '<i class="fa fa-trash"></i>';
+                newRemoveBtn.onclick = function(e) {
+                    e.preventDefault();
+                    photoInput.value = '';
+                    removePhotoField.value = 'true';
+                    wrapper.replaceWith(currentPhotoDiv);
+                };
+                
+                wrapper.appendChild(newRemoveBtn);
+                currentPhotoDiv.parentNode.replaceChild(wrapper, currentPhotoDiv);
+            } else if (currentPhotoDiv && currentPhotoDiv.tagName === 'IMG') {
+                // Update existing image
+                currentPhotoDiv.src = e.target.result;
+                // Show remove button if it was hidden
+                if (removePhotoBtn) removePhotoBtn.style.display = 'block';
+            }
+            
+            // Reset remove flag since we're adding a new photo
+            if (removePhotoField) {
+                removePhotoField.value = 'false';
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// Show loading state on form submit
+document.querySelector('form')?.addEventListener('submit', function() {
+    const submitBtn = this.querySelector('button[type="submit"]');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> {% trans "Saving..." %}';
+    }
+});
+</script>
+
+</body>
+</html>

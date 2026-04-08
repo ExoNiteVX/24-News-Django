@@ -1,0 +1,72 @@
+{% load static %}
+{% load i18n %}
+
+<div class="container-fluid fh5co_footer_bg">
+    <div class="container justify-content-center pt-5 pb-5">
+        <div class="row">
+            <div class="col-md-4 col-lg-3">
+                <div class="footer_main_title py-3">{% trans 'About Us' %}</div>
+                <div class="footer_sub_about pb-3">
+                    {% trans '24 News is your trusted source for breaking news, trending stories, and in-depth coverage of politics, business, technology, and more.' %}
+                </div>
+                <div class="footer_mediya_icon">
+                    <div class="text-center d-inline-block"><a class="fh5co_display_table_footer" href="#"><div class="fh5co_verticle_middle"><i class="fa fa-linkedin"></i></div></a></div>
+                    <div class="text-center d-inline-block"><a class="fh5co_display_table_footer" href="#"><div class="fh5co_verticle_middle"><i class="fa fa-google-plus"></i></div></a></div>
+                    <div class="text-center d-inline-block"><a class="fh5co_display_table_footer" href="https://twitter.com/fh5co" target="_blank"><div class="fh5co_verticle_middle"><i class="fa fa-twitter"></i></div></a></div>
+                    <div class="text-center d-inline-block"><a class="fh5co_display_table_footer" href="https://fb.com/fh5co" target="_blank"><div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div></a></div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-2">
+                <div class="footer_main_title py-3">{% trans 'Quick Links' %}</div>
+                <ul class="footer_menu">
+                    <li><a href="{% url 'home' %}"><i class="fa fa-angle-right"></i> {% trans 'Home' %}</a></li>
+                    <li><a href="{% url 'blog' %}"><i class="fa fa-angle-right"></i> {% trans 'Blog' %}</a></li>
+                    <li><a href="{% url 'politics' %}"><i class="fa fa-angle-right"></i> {% trans 'Politics' %}</a></li>
+                    <li><a href="{% url 'business' %}"><i class="fa fa-angle-right"></i> {% trans 'Business' %}</a></li>
+                    <li><a href="{% url 'technology' %}"><i class="fa fa-angle-right"></i> {% trans 'Technology' %}</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="footer_main_title py-3">{% trans 'Categories' %}</div>
+                <ul class="footer_menu">
+                    {% for category in category|slice:":4" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'category_detail' category.slug %}">{{ category.name }}</a>
+                    </li>
+                    {% endfor %}
+                    <li><a href="{% url 'home' %}"><i class="fa fa-angle-right"></i> {% trans 'News' %}</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="footer_main_title py-3">{% trans 'Newsletter' %}</div>
+                <p class="footer_sub_about">{% trans 'Subscribe to our newsletter for the latest updates.' %}</p>
+                <form action="{% url 'newsletter_subscribe' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="{% trans 'Your email' %}" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid fh5co_footer_right_reserved">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 py-4 Reserved"> {% trans '© Copyright 2024, All rights reserved. Design by' %} <a href="https://freehtml5.co" title="Free HTML5 Bootstrap templates">FreeHTML5.co</a>. </div>
+            <div class="col-12 col-md-6 spdp_right py-4">
+                <a href="{% url 'home' %}" class="footer_last_part_menu">{% trans 'Home' %}</a>
+                <a href="{% url 'contact' %}" class="footer_last_part_menu">{% trans 'Contact' %}</a>
+                <a href="{% url 'about' %}" class="footer_last_part_menu">{% trans 'About' %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>

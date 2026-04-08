@@ -66,44 +66,50 @@
 
     var videos = function() {
 
-
         $(document).ready(function () {
-            $('#play-video').on('click', function (ev) {
-                $(".fh5co_hide").fadeOut();
-                $("#video")[0].src += "&autoplay=1";
+            // Handle video play buttons with unique IDs
+            $('[id^="play-video-"]').on('click', function (ev) {
+                var buttonId = $(this).attr('id');
+                var videoNumber = buttonId.split('-')[1];
+                var videoId = '#video-' + videoNumber;
+                
+                $(this).fadeOut();
+                $(videoId)[0].src += "&autoplay=1";
                 ev.preventDefault();
-
             });
         });
 
-
-        $(document).ready(function () {
-            $('#play-video_2').on('click', function (ev) {
-                $(".fh5co_hide_2").fadeOut();
-                $("#video_2")[0].src += "&autoplay=1";
-                ev.preventDefault();
-
+        // Fallback for old video IDs if they exist
+        if ($('#play-video').length) {
+            $(document).ready(function () {
+                $('#play-video').on('click', function (ev) {
+                    $(".fh5co_hide").fadeOut();
+                    $("#video")[0].src += "&autoplay=1";
+                    ev.preventDefault();
+                });
             });
-        });
+        }
 
-        $(document).ready(function () {
-            $('#play-video_3').on('click', function (ev) {
-                $(".fh5co_hide_3").fadeOut();
-                $("#video_3")[0].src += "&autoplay=1";
-                ev.preventDefault();
-
+        // Check for old video IDs and handle them if they exist
+        if ($('#play-video_3').length) {
+            $(document).ready(function () {
+                $('#play-video_3').on('click', function (ev) {
+                    $(".fh5co_hide_3").fadeOut();
+                    $("#video_3")[0].src += "&autoplay=1";
+                    ev.preventDefault();
+                });
             });
-        });
+        }
 
-
-        $(document).ready(function () {
-            $('#play-video_4').on('click', function (ev) {
-                $(".fh5co_hide_4").fadeOut();
-                $("#video_4")[0].src += "&autoplay=1";
-                ev.preventDefault();
-
+        if ($('#play-video_4').length) {
+            $(document).ready(function () {
+                $('#play-video_4').on('click', function (ev) {
+                    $(".fh5co_hide_4").fadeOut();
+                    $("#video_4")[0].src += "&autoplay=1";
+                    ev.preventDefault();
+                });
             });
-        });
+        }
     };
 
     var googleTranslateFormStyling = function() {

@@ -1,17 +1,52 @@
 <!DOCTYPE html>
-<!--
-	24 News by FreeHTML5.co
-	Twitter: https://twitter.com/fh5co
-	Facebook: https://fb.com/fh5co
-	URL: https://freehtml5.co
--->
 <html lang="en" class="no-js">
 <head>
 {% load static %}
+{% load i18n %}
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>24 News — Free Website Template, Free HTML5 Template by FreeHTML5.co</title>
+    <title>{{ about_page.title }} - 24 News</title>
+    <meta name="description" content="{{ about_page.description|truncatechars:160 }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{{ about_page.title }}">
+    <meta property="og:description" content="{{ about_page.description|truncatechars:160 }}">
+    <meta property="og:image" content="{{ about_page.image.url }}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+    <meta property="twitter:title" content="{{ about_page.title }}">
+    <meta property="twitter:description" content="{{ about_page.description|truncatechars:160 }}">
+    <meta property="twitter:image" content="{{ about_page.image.url }}">
+    
+    <!-- Print Styles -->
+    <style type="text/css" media="print">
+        .fh5co_header_bg,
+        .fh5co_padding_menu,
+        .fh5co_footer_bg,
+        .share-section,
+        .comments-section,
+        .prev-next-nav,
+        .gototop,
+        nav,
+        .fh5co_heading_border_bottom {
+            display: none !important;
+        }
+        .container {
+            max-width: 100% !important;
+        }
+        body {
+            font-size: 12pt;
+            line-height: 1.5;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
     <link href="{% static 'css/media_query.css' %}" rel="stylesheet" type="text/css"/>
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -30,7 +65,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 fh5co_mediya_center"><a href="#" class="color_fff fh5co_mediya_setting"><i
-                    class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;Friday, 5 January 2018</a>
+                    class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;{% now "l, j F Y" %}</a>
                 <div class="d-inline-block fh5co_trading_posotion_relative"><a href="#" class="treding_btn">Trending</a>
                     <div class="fh5co_treding_position_absolute"></div>
                 </div>
@@ -62,7 +97,7 @@
                     <a href="https://fb.com/fh5co" target="_blank" class="fh5co_display_table"><div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div></a>
                 </div>
                 <!--<div class="d-inline-block text-center"><img src="images/country.png" alt="img" class="fh5co_country_width"/></div>-->
-                <div class="d-inline-block text-center dd_position_relative ">
+                <div class="d-inline-block text-center dd_position_relative mr-4">
                     <select class="form-control fh5co_text_select_option">
                         <option>English </option>
                         <option>French </option>
@@ -70,6 +105,44 @@
                         <option>Spanish </option>
                     </select>
                 </div>
+                
+                <!-- Auth Buttons -->
+                {% if request.user.is_authenticated %}
+                <div class="d-inline-block ml-3">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #333; text-decoration: none; font-size: 16px; font-weight: 500;">
+                            {% if request.user.profile.photo %}
+                                <img src="{{ request.user.profile.photo.url }}" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-right: 5px;">
+                            {% else %}
+                                <i class="fa fa-user-circle fa-lg"></i>
+                            {% endif %}
+                            {{ request.user.username }} <i class="fa fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="min-width: 150px;">
+                            <a class="dropdown-item" href="{% url 'profile' %}"><i class="fa fa-user mr-2"></i>Visit Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <form method="post" action="{% url 'logout' %}" class="dropdown-item p-0 m-0">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link dropdown-item text-left w-100" style="color: #dc3545; text-decoration: none;">
+                                    <i class="fa fa-sign-out mr-2"></i>Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="d-inline-block mr-3 ml-3">
+                    <a href="{% url 'login' %}" style="color: #333; text-decoration: none;">
+                        <i class="fa fa-sign-in"></i> Login
+                    </a>
+                </div>
+                <div class="d-inline-block">
+                    <a href="{% url 'register' %}" style="color: #333; text-decoration: none;">
+                        <i class="fa fa-user-plus"></i> Register
+                    </a>
+                </div>
+                {% endif %}
+                
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -81,7 +154,7 @@
             <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
-            <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt="img" class="mobile_logo_width"/></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="img" class="mobile_logo_width"/></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -91,24 +164,26 @@
                         <a class="nav-link" href="{% url 'blog' %}">Blog <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="{% url 'single' %}">Single <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'single' about_page.id %}">Single <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">World <span class="sr-only">(current)</span></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                            <a class="dropdown-item" href="#">Action in</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="{% url 'politics' %}">Politics</a>
+                            <a class="dropdown-item" href="{% url 'business' %}">Business</a>
+                            <a class="dropdown-item" href="{% url 'technology' %}">Technology</a>
+                            <a class="dropdown-item" href="{% url 'science' %}">Science</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton3" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Community<span class="sr-only">(current)</span></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                            <a class="dropdown-item" href="#">Action in</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="{% url 'forums' %}">Forums</a>
+                            <a class="dropdown-item" href="{% url 'events' %}">Events</a>
+                            <a class="dropdown-item" href="{% url 'members' %}">Members</a>
+                            <a class="dropdown-item" href="{% url 'groups' %}">Groups</a>
                         </div>
                     </li>
                     <li class="nav-item ">
@@ -119,60 +194,231 @@
         </nav>
     </div>
 </div>
-<div id="fh5co-title-box" style="background-image: url(images/camila-cordeiro-114636.jpg); background-position: 50% 90.5px;" data-stellar-background-ratio="0.5">
+
+<!-- Breadcrumb Navigation -->
+<div class="container-fluid bg-light py-2">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 bg-transparent">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                {% if about_page.category %}
+                <li class="breadcrumb-item"><a href="{% url 'category_detail' about_page.category.slug %}">{{ about_page.category.name }}</a></li>
+                {% endif %}
+                <li class="breadcrumb-item active" aria-current="page">{{ about_page.title|truncatechars:50 }}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div id="fh5co-title-box" style="background-image: url({% static 'images/camila-cordeiro-114636.jpg' %}); background-position: 50% 90.5px;" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="page-title">
-        <img src="{% static 'images/person_1.jpg' %}" alt="Free HTML5 by FreeHTMl5.co">
-        <span>January 1, 2018</span>
-        <h2>How to write interesting articles</h2>
+        <img src="{{ about_page.image.url }}" alt="{{ about_page.title }}">
+        <span>{{ about_page.created_at|date:"F d, Y" }}</span>
+        <div class="text-white mt-2"><i class="fa fa-eye"></i> {{ about_page.views }} views
+            <span class="ml-3"><i class="fa fa-clock-o"></i> {{ about_page.reading_time }} min read</span>
+        </div>
+        {% if about_page.author %}
+        <div class="text-white mt-1"><i class="fa fa-user"></i> By {{ about_page.author.get_full_name|default:about_page.author.username }}</div>
+        {% endif %}
+        <h2>{{ about_page.title }}</h2>
+        
+        <!-- Bookmark and Like Buttons -->
+        <div class="mt-3">
+            {% if user.is_authenticated %}
+            <form action="{% url 'toggle_bookmark' %}" method="post" class="d-inline-block mr-2">
+                {% csrf_token %}
+                <input type="hidden" name="single_page_id" value="{{ about_page.id }}">
+                <button type="submit" class="btn btn-outline-light btn-sm">
+                    <i class="fa fa-bookmark"></i> 
+                    {% if about_page.id in user_bookmarks %}Bookmarked{% else %}Bookmark{% endif %}
+                </button>
+            </form>
+            <form action="{% url 'vote' %}" method="post" class="d-inline-block mr-2">
+                {% csrf_token %}
+                <input type="hidden" name="vote_type" value="like">
+                <input type="hidden" name="single_page_id" value="{{ about_page.id }}">
+                <button type="submit" class="btn btn-outline-light btn-sm">
+                    <i class="fa fa-thumbs-up"></i> {{ about_page.likes }}
+                </button>
+            </form>
+            <form action="{% url 'vote' %}" method="post" class="d-inline-block">
+                {% csrf_token %}
+                <input type="hidden" name="vote_type" value="dislike">
+                <input type="hidden" name="single_page_id" value="{{ about_page.id }}">
+                <button type="submit" class="btn btn-outline-light btn-sm">
+                    <i class="fa fa-thumbs-down"></i> {{ about_page.dislikes }}
+                </button>
+            </form>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm mr-2">
+                <i class="fa fa-bookmark"></i> Bookmark
+            </a>
+            <span class="text-white"><i class="fa fa-thumbs-up"></i> {{ about_page.likes }}</span>
+            <span class="text-white ml-2"><i class="fa fa-thumbs-down"></i> {{ about_page.dislikes }}</span>
+            {% endif %}
+        </div>
     </div>
 </div>
 <div id="fh5co-single-content" class="container-fluid pb-4 pt-4 paddding">
     <div class="container paddding">
         <div class="row mx-0">
             <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla malesuada enim id enim congue
-                    convallis. Praesent a cursus orci. Proin mauris eros, rhoncus in risus nec, vestibulum dignissim
-                    diam. Duis dapibus, magna ac fringilla consectetur, tellus quam aliquam quam, molestie tincidunt
-                    justo risus et nunc. Donec quis justo nec diam hendrerit facilisis placerat non magna. Class aptent
-                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                </p>
-                <p>
-                    Nulla tincidunt sit amet ligula interdum pulvinar. Sed nec volutpat enim. Praesent pretium
-                    ullamcorper
-                    quam, at rhoncus magna consectetur quis. Nulla condimentum, libero vel varius sodales, lacus urna
-                    accumsan purus, at
-                    mattis nisi nibh in lorem. Sed laoreet, ante vitae tincidunt auctor, sapien metus tincidunt ante,
-                    quis aliquam lacus risus id quam.
-                </p>
-                <h3>Free HTML5 Templates</h3>
-                <p>
-                    Nam vehicula viverra quam, nec ornare ex convallis eget. Praesent pulvinar, justo at lacinia
-                    elementum, dolor elit facilisis massa, vel feugiat elit massa et libero. Praesent hendrerit metus eu
-                    elementum commodo. Morbi tempus mi a nulla scelerisque, vitae vulputate nisi commodo. Maecenas felis
-                    urna, dictum quis mollis quis, mollis vel ligula. Nullam sodales sapien tellus, ornare tincidunt
-                    dolor imperdiet at. Vestibulum convallis, felis quis condimentum finibus, justo lectus aliquam
-                    libero, eu lacinia tellus leo eu orci.
-                </p>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, modi!</li>
-                    <li>Ea iure at, debitis culpa perspiciatis suscipit laudantium a, expedita.</li>
-                    <li>Voluptate distinctio perspiciatis cum sed ipsum nisi accusantium a aut!</li>
-                    <li>Sed vel quo dignissimos, quaerat totam officia, deserunt provident minus.</li>
-                </ul>
-                <p>
-                    Maecenas consequat dictum aliquam. Praesent nec magna at ipsum facilisis dictum sit amet nec arcu.
-                    Donec ac metus a elit rhoncus euismod et sit amet velit. Nunc quis lacus vel metus tincidunt
-                    vulputate in et libero. Aliquam dolor lacus, facilisis ultrices rutrum in, blandit vitae nulla.
-                    Nullam vestibulum, odio vitae aliquam aliquam, nibh dui iaculis augue, ut tristique nisi est in
-                    tellus. Fusce volutpat ultricies venenatis. In a arcu in tellus tincidunt accumsan. Nulla pretium at
-                    ex viverra vulputate. Cras mollis velit metus, non suscipit felis luctus sit amet. Ut vel leo vitae
-                    magna blandit tempor in sit amet arcu. Donec dignissim mattis dui. Donec ultrices malesuada sapien,
-                    ut fermentum nisi efficitur eu. Phasellus dui eros, posuere vel lacus vitae, venenatis feugiat
-                    libero. Nunc sed nisi feugiat, consequat arcu id, vehicula augue. Donec viverra tincidunt nisi eget
-                    ornare.
-                </p>
+               {{ about_page.description }}
+               
+               <!-- Share Buttons -->
+               <div class="share-section mt-4 pt-3 border-top">
+                   <h5 class="mb-3">{% trans 'Share this article' %}</h5>
+                   <div class="d-flex flex-wrap">
+                       <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" 
+                          target="_blank" class="btn btn-primary mr-2 mb-2" style="background-color: #3b5998; border-color: #3b5998;">
+                           <i class="fa fa-facebook"></i> {% trans 'Facebook' %}
+                       </a>
+                       <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ about_page.title|urlencode }}" 
+                          target="_blank" class="btn btn-info mr-2 mb-2" style="background-color: #1da1f2; border-color: #1da1f2;">
+                           <i class="fa fa-twitter"></i> {% trans 'Twitter' %}
+                       </a>
+                       <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri|urlencode }}" 
+                          target="_blank" class="btn btn-primary mr-2 mb-2" style="background-color: #0077b5; border-color: #0077b5;">
+                           <i class="fa fa-linkedin"></i> {% trans 'LinkedIn' %}
+                       </a>
+                       <a href="https://api.whatsapp.com/send?text={{ about_page.title|urlencode }}%20{{ request.build_absolute_uri|urlencode }}" 
+                          target="_blank" class="btn btn-success mr-2 mb-2" style="background-color: #25d366; border-color: #25d366;">
+                           <i class="fa fa-whatsapp"></i> {% trans 'WhatsApp' %}
+                       </a>
+                       <a href="mailto:?subject={{ about_page.title|urlencode }}&body={{ request.build_absolute_uri|urlencode }}" 
+                          class="btn btn-secondary mr-2 mb-2">
+                           <i class="fa fa-envelope"></i> {% trans 'Email' %}
+                       </a>
+                       <button onclick="window.print()" class="btn btn-outline-dark mb-2">
+                           <i class="fa fa-print"></i> {% trans 'Print' %}
+                       </button>
+                   </div>
+                   
+                   <!-- Copy Link -->
+                   <div class="input-group mt-3" style="max-width: 400px;">
+                       <input type="text" class="form-control" value="{{ request.build_absolute_uri }}" id="shareLink" readonly>
+                       <div class="input-group-append">
+                           <button class="btn btn-outline-primary" type="button" onclick="copyToClipboard()">
+                               <i class="fa fa-copy"></i> {% trans 'Copy' %}
+                           </button>
+                       </div>
+                   </div>
+                   <small class="text-success d-none" id="copyMessage">{% trans 'Link copied to clipboard!' %}</small>
+               </div>
+               
+               <script>
+                   function copyToClipboard() {
+                       var copyText = document.getElementById("shareLink");
+                       copyText.select();
+                       copyText.setSelectionRange(0, 99999);
+                       document.execCommand("copy");
+                       document.getElementById("copyMessage").classList.remove("d-none");
+                       setTimeout(function() {
+                           document.getElementById("copyMessage").classList.add("d-none");
+                       }, 3000);
+                   }
+               </script>
+               
+               <!-- Comments Section -->
+               <div class="comments-section mt-5 pt-4 border-top">
+                   <h4 class="mb-4"><i class="fa fa-comments"></i> Comments <span class="badge badge-primary">{{ comments|length }}</span></h4>
+                   
+                   <!-- Comment Form -->
+                   {% if user.is_authenticated %}
+                   <div class="comment-form mb-4">
+                       <form method="post" action="{% url 'add_comment' %}">
+                           {% csrf_token %}
+                           <input type="hidden" name="single_page_id" value="{{ about_page.id }}">
+                           <div class="form-group">
+                               <textarea class="form-control" name="content" rows="3" placeholder="Write your comment..." required></textarea>
+                               <small class="text-muted">Your comment will be visible after moderation approval.</small>
+                           </div>
+                           <button type="submit" class="btn btn-primary">Post Comment</button>
+                       </form>
+                   </div>
+                   {% else %}
+                   <div class="alert alert-info">
+                       <a href="{% url 'login' %}">Login</a> to post a comment.
+                   </div>
+                   {% endif %}
+                   
+                   <!-- Comments List -->
+                   <div class="comments-list">
+                       {% for comment in comments %}
+                       <div class="comment-item mb-3 pb-3 border-bottom">
+                           <div class="d-flex">
+                               <div class="mr-3">
+                                   <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                       {{ comment.author.username|first|upper }}
+                                   </div>
+                               </div>
+                               <div class="flex-grow-1">
+                                   <div class="d-flex justify-content-between align-items-start">
+                                       <div>
+                                           <h6 class="mb-1">{{ comment.author.get_full_name|default:comment.author.username }}</h6>
+                                           <small class="text-muted">{{ comment.created_at|timesince }} ago</small>
+                                       </div>
+                                       {% if user == comment.author and not comment.is_approved %}
+                                       <span class="badge badge-warning"><i class="fa fa-clock-o"></i> Pending Approval</span>
+                                       {% endif %}
+                                   </div>
+                                   <p class="mb-0 mt-1">{{ comment.content }}</p>
+                               </div>
+                           </div>
+                       </div>
+                       {% empty %}
+                       <div class="text-center py-3">
+                           <p class="text-muted">No comments yet. Be the first to comment!</p>
+                       </div>
+                       {% endfor %}
+                   </div>
+               </div>
+               
+               <!-- Author Bio Section -->
+               {% if about_page.author %}
+               <div class="author-bio-section mt-5 pt-4 border-top">
+                   <h4 class="mb-4">About the Author</h4>
+                   <div class="d-flex align-items-start">
+                       {% if author_profile.photo %}
+                       <img src="{{ author_profile.photo.url }}" alt="{{ about_page.author.get_full_name|default:about_page.author.username }}" class="rounded-circle mr-3" style="width: 80px; height: 80px; object-fit: cover;">
+                       {% else %}
+                       <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mr-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                           {{ about_page.author.username|first|upper }}
+                       </div>
+                       {% endif %}
+                       <div>
+                           <h5>{{ about_page.author.get_full_name|default:about_page.author.username }}</h5>
+                           {% if author_profile.bio %}
+                           <p>{{ author_profile.bio }}</p>
+                           {% endif %}
+                           <a href="{% url 'author_detail' about_page.author.id %}" class="btn btn-outline-primary btn-sm">View All Articles</a>
+                       </div>
+                   </div>
+               </div>
+               {% endif %}
+               
+               <!-- Previous/Next Navigation -->
+               <div class="prev-next-nav mt-5 pt-4 border-top">
+                   <div class="row">
+                       <div class="col-6">
+                           {% if prev_article %}
+                           <a href="{% url 'single' prev_article.id %}" class="d-block">
+                               <small class="text-muted"><i class="fa fa-arrow-left"></i> Previous</small>
+                               <p class="mb-0 font-weight-bold">{{ prev_article.title|truncatechars:50 }}</p>
+                           </a>
+                           {% endif %}
+                       </div>
+                       <div class="col-6 text-right">
+                           {% if next_article %}
+                           <a href="{% url 'single' next_article.id %}" class="d-block">
+                               <small class="text-muted">Next <i class="fa fa-arrow-right"></i></small>
+                               <p class="mb-0 font-weight-bold">{{ next_article.title|truncatechars:50 }}</p>
+                           </a>
+                           {% endif %}
+                       </div>
+                   </div>
+               </div>
             </div>
             <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
                 <div>
@@ -180,59 +426,51 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="fh5co_tags_all">
-                    <a href="#" class="fh5co_tagg">Business</a>
-                    <a href="#" class="fh5co_tagg">Technology</a>
-                    <a href="#" class="fh5co_tagg">Sport</a>
-                    <a href="#" class="fh5co_tagg">Art</a>
-                    <a href="#" class="fh5co_tagg">Lifestyle</a>
-                    <a href="#" class="fh5co_tagg">Three</a>
-                    <a href="#" class="fh5co_tagg">Photography</a>
-                    <a href="#" class="fh5co_tagg">Lifestyle</a>
-                    <a href="#" class="fh5co_tagg">Art</a>
-                    <a href="#" class="fh5co_tagg">Education</a>
-                    <a href="#" class="fh5co_tagg">Social</a>
-                    <a href="#" class="fh5co_tagg">Three</a>
+                    {% for tag in about_page.tags.all %}
+                        <a href="{% url 'tag_detail' tag.slug %}" class="fh5co_tagg">{{ tag.name }}</a>
+                    {% empty %}
+                        {% if about_page.category %}
+                        <a href="{% url 'category_detail' about_page.category.slug %}" class="fh5co_tagg">{{ about_page.category }}</a>
+                        {% endif %}
+                    {% endfor %}
                 </div>
+                
+                <!-- Related News Section -->
+                <div>
+                    <div class="fh5co_heading fh5co_heading_border_bottom pt-3 py-2 mb-4">Related News</div>
+                </div>
+                {% for related in related_news %}
+                <div class="row pb-3">
+                    <div class="col-5 align-self-center">
+                        <a href="{% url 'single' related.id %}">
+                            <img src="{{ related.image.url }}" alt="{{ related.title }}" class="fh5co_most_trading"/>
+                        </a>
+                    </div>
+                    <div class="col-7 paddding">
+                        <a href="{% url 'single' related.id %}" class="most_fh5co_treding_font">{{ related.title }}</a>
+                        <div class="most_fh5co_treding_font_123">{{ related.created_at|date:"M d, Y" }}</div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-muted">No related news found.</div>
+                {% endfor %}
+                
                 <div>
                     <div class="fh5co_heading fh5co_heading_border_bottom pt-3 py-2 mb-4">Most Popular</div>
                 </div>
+                {% for i in trendingnews %}
+                    {% if forloop.counter0 < 4 %}
                 <div class="row pb-3">
                     <div class="col-5 align-self-center">
-                        <img src="{% static 'images/download%20(1).jpg' %}" alt="img" class="fh5co_most_trading"/>
+                        <img src="{{ i.image.url }}" alt="img" class="fh5co_most_trading"/>
                     </div>
                     <div class="col-7 paddding">
-                        <div class="most_fh5co_treding_font"> Magna aliqua ut enim ad minim veniam quis nostrud.</div>
-                        <div class="most_fh5co_treding_font_123"> April 18, 2016</div>
+                        <div class="most_fh5co_treding_font"> {{ i.title }} </div>
+                        <div class="most_fh5co_treding_font_123"> {{ i.date }}</div>
                     </div>
                 </div>
-                <div class="row pb-3">
-                    <div class="col-5 align-self-center">
-                        <img src="{% static 'images/allef-vinicius-108153.jpg' %}" alt="img" class="fh5co_most_trading"/>
-                    </div>
-                    <div class="col-7 paddding">
-                        <div class="most_fh5co_treding_font"> Enim ad minim veniam nostrud xercitation ullamco.</div>
-                        <div class="most_fh5co_treding_font_123"> April 18, 2016</div>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <div class="col-5 align-self-center">
-                        <img src="{% static 'images/download%20(2).jpg' %}" alt="img" class="fh5co_most_trading"/>
-                    </div>
-                    <div class="col-7 paddding">
-                        <div class="most_fh5co_treding_font"> Magna aliqua ut enim ad minim veniam quis nostrud.</div>
-                        <div class="most_fh5co_treding_font_123"> April 18, 2016</div>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <div class="col-5 align-self-center">
-                        <img src="{% static 'images/seth-doyle-133175.jpg' %}" alt="img"
-                              class="fh5co_most_trading"/>
-                    </div>
-                    <div class="col-7 paddding">
-                        <div class="most_fh5co_treding_font"> Magna aliqua ut enim ad minim veniam quis nostrud.</div>
-                        <div class="most_fh5co_treding_font_123"> April 18, 2016</div>
-                    </div>
-                </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -361,7 +599,6 @@
             <div class="col-12 col-md-6 py-4 Reserved"> © Copyright 2018, All rights reserved. Design by <a href="https://freehtml5.co" title="Free HTML5 Bootstrap templates">FreeHTML5.co</a>. </div>
             <div class="col-12 col-md-6 spdp_right py-4">
                 <a href="{% url 'home' %}" class="footer_last_part_menu">Home</a>
-                <a href="{% url 'about' %}" class="footer_last_part_menu">About</a>
                 <a href="{% url 'contact' %}" class="footer_last_part_menu">Contact</a>
                 <a href="{% url 'blog' %}" class="footer_last_part_menu">Latest News</a></div>
         </div>
@@ -375,9 +612,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="{% static 'js/bootstrap.js' %}"></script>
-<script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 
 <script>if (!navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)){$(window).stellar();}</script>
 

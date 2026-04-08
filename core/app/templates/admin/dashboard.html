@@ -1,0 +1,299 @@
+{% extends "unfold/layouts/base.html" %}
+{% load i18n %}
+
+{% block extrahead %}
+<style>
+    /* Force dark mode - override white backgrounds */
+    html, body, #container, #header, #main, #content, #content-main {
+        background-color: #0f172a !important;
+    }
+    
+    /* Fix any bg-white or transparent elements */
+    [class*="bg-white"],
+    .bg-white,
+    [style*="background-color: white"],
+    [style*="background-color: #fff"],
+    [style*="background-color: #ffffff"] {
+        background-color: #1e293b !important;
+    }
+    
+    /* Fix the buggy popup/dropdown with transparency */
+    [class*="absolute"][class*="bg-white"],
+    [class*="absolute"][class*="border-base-200"] {
+        background-color: #1e293b !important;
+        background: #1e293b !important;
+        border-color: #334155 !important;
+        opacity: 1 !important;
+    }
+    
+    /* Ensure text is visible on dark backgrounds */
+    body {
+        color: #e2e8f0 !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="p-4" style="background-color: #0f172a; min-height: 100vh;">
+    <h1 class="text-2xl font-semibold mb-6 text-font-important">Dashboard Overview</h1>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
+        <div class="bg-base-900 border border-base-800 rounded-lg p-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-3xl font-bold text-blue-500">{{ total_news }}</div>
+                    <div class="text-font-subtle text-sm mt-1">Total News</div>
+                </div>
+                <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-base-900 border border-base-800 rounded-lg p-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-3xl font-bold text-green-500">{{ total_pages }}</div>
+                    <div class="text-font-subtle text-sm mt-1">Single Pages</div>
+                </div>
+                <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-base-900 border border-base-800 rounded-lg p-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-3xl font-bold text-cyan-500">{{ total_comments }}</div>
+                    <div class="text-font-subtle text-sm mt-1">Comments</div>
+                </div>
+                <div class="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-base-900 border border-base-800 rounded-lg p-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-3xl font-bold text-orange-500">{{ pending_comments }}</div>
+                    <div class="text-font-subtle text-sm mt-1">Pending</div>
+                </div>
+                <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-base-900 border border-base-800 rounded-lg p-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-3xl font-bold text-purple-500">{{ total_users }}</div>
+                    <div class="text-font-subtle text-sm mt-1">Users</div>
+                </div>
+                <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-base-900 border border-base-800 rounded-lg p-5">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="text-3xl font-bold text-pink-500">{{ total_views }}</div>
+                    <div class="text-font-subtle text-sm mt-1">Total Views</div>
+                </div>
+                <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-base-900 border border-base-800 rounded-lg overflow-hidden">
+            <div class="px-6 py-4 border-b border-base-800 flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-font-important flex items-center gap-2">
+                    <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                    Most Viewed Posts
+                </h2>
+                <span class="text-xs text-font-subtle">Top 10</span>
+            </div>
+            <div class="divide-y divide-base-800">
+                {% for post in top_posts %}
+                <a href="{{ post.url }}" class="flex items-center justify-between px-6 py-4 hover:bg-base-800 transition-colors">
+                    <div class="flex-1 min-w-0 mr-4">
+                        <div class="font-medium text-font-default truncate">{{ post.title }}</div>
+                        <div class="text-xs text-font-subtle mt-1">{{ post.type }}</div>
+                    </div>
+                    <div class="text-right flex-shrink-0">
+                        <div class="text-xl font-bold text-yellow-500">{{ post.views }}</div>
+                        <div class="text-xs text-font-subtle">views</div>
+                    </div>
+                </a>
+                {% empty %}
+                <div class="px-6 py-8 text-center text-font-subtle">
+                    No viewed posts yet
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="bg-base-900 border border-base-800 rounded-lg overflow-hidden">
+            <div class="px-6 py-4 border-b border-base-800 flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-font-important flex items-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                    Most Liked Posts
+                </h2>
+                <span class="text-xs text-font-subtle">Top 10</span>
+            </div>
+            <div class="divide-y divide-base-800">
+                {% for post in most_liked %}
+                <a href="{{ post.url }}" class="flex items-center justify-between px-6 py-4 hover:bg-base-800 transition-colors">
+                    <div class="flex-1 min-w-0 mr-4">
+                        <div class="font-medium text-font-default truncate">{{ post.title }}</div>
+                        <div class="text-xs text-font-subtle mt-1">{{ post.type }}</div>
+                    </div>
+                    <div class="flex items-center gap-4 text-right flex-shrink-0">
+                        <div>
+                            <div class="text-lg font-bold text-green-500">{{ post.likes }}</div>
+                            <div class="text-xs text-font-subtle">likes</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-bold text-red-500">{{ post.dislikes }}</div>
+                            <div class="text-xs text-font-subtle">dislikes</div>
+                        </div>
+                    </div>
+                </a>
+                {% empty %}
+                <div class="px-6 py-8 text-center text-font-subtle">
+                    No liked posts yet
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2">
+            <h2 class="text-xl font-semibold text-font-important mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                </svg>
+                Applications
+            </h2>
+            <div class="grid grid-cols-1 gap-4">
+                {% for app in app_list %}
+                <div class="bg-base-900 border border-base-800 rounded-xl p-6 hover:border-blue-500/50 transition-all">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/30 to-purple-500/30 flex items-center justify-center">
+                            <span class="text-blue-400 text-2xl font-bold">{{ app.name|first|upper }}</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-font-important">{{ app.name }}</h3>
+                            <p class="text-sm text-font-subtle">{{ app.models|length }} models</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {% for model in app.models %}
+                        <a href="{{ model.admin_url }}" class="flex items-center justify-between px-4 py-3 rounded-lg hover:bg-base-800 text-sm text-font-default transition-colors group">
+                            <span class="group-hover:text-blue-400 transition-colors">{{ model.name }}</span>
+                            <svg class="w-4 h-4 text-font-subtle group-hover:text-blue-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="bg-base-900 border border-base-800 rounded-xl p-6 h-fit self-start">
+            <h2 class="text-xl font-semibold text-font-important mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                </svg>
+                Content Distribution
+            </h2>
+            <div class="relative h-32">
+                <canvas id="contentChart"></canvas>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const ctx = document.getElementById('contentChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['News', 'Pages', 'Comments', 'Users'],
+                            datasets: [{
+                                data: [{{ total_news }}, {{ total_pages }}, {{ total_comments }}, {{ total_users }}],
+                                backgroundColor: ['#3b82f6', '#22c55e', '#06b6d4', '#a855f7'],
+                                borderColor: '#1e293b',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        color: '#94a3b8',
+                                        padding: 15,
+                                        font: { size: 12 }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+            
+            <div class="mt-4 border-t border-base-800 pt-4">
+                <h3 class="text-sm font-semibold text-font-important mb-3 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    Recent Users ({{ total_users }})
+                </h3>
+                <div class="space-y-2 max-h-48 overflow-y-auto">
+                    {% for user in recent_users %}
+                    <a href="/admin/auth/user/{{ user.id }}/change/" class="flex items-center gap-3 p-2 rounded-lg hover:bg-base-800 transition-colors group">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500/30 to-blue-500/30 flex items-center justify-center text-xs font-bold text-green-400">
+                            {{ user.username|first|upper }}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-sm text-font-default truncate group-hover:text-blue-400 transition-colors">{{ user.username }}</div>
+                            <div class="text-xs text-font-subtle">{{ user.date_joined|date:"M d, Y" }}</div>
+                        </div>
+                    </a>
+                    {% empty %}
+                    <div class="text-sm text-font-subtle py-2">No users yet</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

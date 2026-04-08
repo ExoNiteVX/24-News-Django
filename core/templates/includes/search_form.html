@@ -1,0 +1,15 @@
+{% load static %}
+<div class="row mb-4">
+    <div class="col-12">
+        <form method="GET" action="" class="form-inline">
+            <div class="input-group w-100">
+                <input type="text" name="search" class="form-control" placeholder="Search {{ page_title|default:'news' }}..." value="{{ search }}">
+                <div class="input-group-append">
+                    <button class="btn btn-warning" type="submit" style="background: #f5bc04; border-color: #f5bc04;">
+                        <i class="fa fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

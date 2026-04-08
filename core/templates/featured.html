@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured News - 24 News</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
+    <style>
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #f5bc04;
+            color: #fff;
+            padding: 5px 15px;
+            font-weight: bold;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    {% include 'includes/header.html' %}
+    
+    <div class="container-fluid pt-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="mb-4">Featured News</h2>
+                    
+                    {% if featured %}
+                        <div class="row">
+                            {% for item in featured %}
+                                <div class="col-md-4 mb-4">
+                                    <div class="card fh5co_suceefull_articles">
+                                        <div class="position-relative">
+                                            <span class="featured-badge">FEATURED</span>
+                                            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="card-img-top">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ item.title }}</h5>
+                                            <p class="text-muted">
+                                                <i class="fa fa-calendar"></i> {{ item.date|date:"M d, Y" }}
+                                                <span class="ml-2"><i class="fa fa-eye"></i> {{ item.views }}</span>
+                                            </p>
+                                            {% if item.model_type == 'main_big' %}
+                                                <a href="{% url 'single' item.id %}" class="btn btn-primary btn-sm">Read More</a>
+                                            {% elif item.model_type == 'news' %}
+                                                <span class="badge badge-secondary">News</span>
+                                            {% elif item.model_type == 'single' %}
+                                                <a href="{% url 'single' item.id %}" class="btn btn-primary btn-sm">Read More</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <h4>No featured news available</h4>
+                            <p>Check back later for featured articles.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% include 'includes/footer.html' %}
+</body>
+</html>
